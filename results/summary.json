@@ -1,0 +1,2191 @@
+{
+ "meta": {
+  "upstream": "nasa/daidalus",
+  "commit": "1c7b58e5525d5cca91cbbf4a8b7337a488243769",
+  "commit_date": "2025-05-06",
+  "component": "WCV_TAUMOD + WCV_TCOA (Java), DO-365 well-clear detection",
+  "run_date": "2026-11-17",
+  "env": {
+   "cpu": "Intel Xeon @ 2.10 GHz, 2 vCPU",
+   "java": "OpenJDK 21.0.12.1",
+   "rust": "rustc 1.97.0",
+   "node": "Node 22.23.4",
+   "python": "Python 3.13.18"
+  },
+  "code_size": {
+   "component_java_lines": 335,
+   "rust_lib_lines": 258
+  }
+ },
+ "counts": {
+  "total": 58983,
+  "valid": 58920,
+  "invalid": 63,
+  "by_category": {
+   "cpa": 36000,
+   "uniform": 12000,
+   "cliff_hmd": 3000,
+   "cliff_level": 1200,
+   "cliff_static": 600,
+   "edge": 120,
+   "sym": 3000,
+   "shift": 3000,
+   "robust": 63
+  },
+  "conflicts": 10300,
+  "violations": 1583,
+  "band": 3125,
+  "selfcheck_samples": 333028,
+  "selfcheck_failures": 0
+ },
+ "grades": {
+  "orig": {
+   "conflict": {
+    "pass": 55795
+   },
+   "violation": {
+    "pass": 55795,
+    "band_agree": 3120,
+    "band_differ": 5
+   },
+   "endpoints": {
+    "n": 8655,
+    "fail": 0,
+    "max_err": 7.988027732608316e-07
+   },
+   "err_hist": {
+    "-15": 1590,
+    "0": 3088,
+    "-14": 2905,
+    "-13": 394,
+    "-16": 157,
+    "-12": 206,
+    "-17": 1,
+    "-10": 100,
+    "-9": 38,
+    "-11": 170,
+    "-8": 5,
+    "-7": 1
+   },
+   "band": {
+    "n": 3125,
+    "agree": 3056,
+    "hmd_agree": 1872,
+    "differ": 69,
+    "hmd_differ": 67,
+    "level_agree": 796,
+    "static_agree": 387,
+    "short_agree": 73,
+    "short_differ": 37,
+    "static_differ": 2,
+    "near-miss_agree": 1
+   },
+   "touch": {
+    "n": 6,
+    "follows_convention": 6
+   },
+   "meta": {
+    "sym_same": 3000,
+    "shift_same": 3000
+   },
+   "failures": 0
+  },
+  "rust": {
+   "conflict": {
+    "pass": 55795
+   },
+   "violation": {
+    "pass": 55795,
+    "band_agree": 3120,
+    "band_differ": 5
+   },
+   "endpoints": {
+    "n": 8655,
+    "fail": 0,
+    "max_err": 3.700895518932157e-07
+   },
+   "err_hist": {
+    "-15": 1726,
+    "0": 3091,
+    "-14": 3124,
+    "-16": 167,
+    "-17": 6,
+    "-13": 143,
+    "-12": 243,
+    "-11": 143,
+    "-10": 10,
+    "-9": 1,
+    "-7": 1
+   },
+   "band": {
+    "n": 3125,
+    "agree": 3085,
+    "hmd_agree": 1901,
+    "differ": 40,
+    "hmd_differ": 38,
+    "level_agree": 796,
+    "static_agree": 387,
+    "short_agree": 106,
+    "short_differ": 4,
+    "static_differ": 2,
+    "near-miss_agree": 1
+   },
+   "touch": {
+    "n": 6,
+    "follows_convention": 6
+   },
+   "meta": {
+    "sym_same": 3000,
+    "shift_same": 3000
+   },
+   "failures": 0
+  },
+  "js": {
+   "conflict": {
+    "pass": 55795
+   },
+   "violation": {
+    "pass": 55795,
+    "band_agree": 3120,
+    "band_differ": 5
+   },
+   "endpoints": {
+    "n": 8655,
+    "fail": 0,
+    "max_err": 3.700895518932157e-07
+   },
+   "err_hist": {
+    "-15": 1726,
+    "0": 3091,
+    "-14": 3124,
+    "-16": 167,
+    "-17": 6,
+    "-13": 143,
+    "-12": 243,
+    "-11": 143,
+    "-10": 10,
+    "-9": 1,
+    "-7": 1
+   },
+   "band": {
+    "n": 3125,
+    "agree": 3085,
+    "hmd_agree": 1901,
+    "differ": 40,
+    "hmd_differ": 38,
+    "level_agree": 796,
+    "static_agree": 387,
+    "short_agree": 106,
+    "short_differ": 4,
+    "static_differ": 2,
+    "near-miss_agree": 1
+   },
+   "touch": {
+    "n": 6,
+    "follows_convention": 6
+   },
+   "meta": {
+    "sym_same": 3000,
+    "shift_same": 3000
+   },
+   "failures": 0
+  }
+ },
+ "pairs": {
+  "orig|rust": {
+   "counts": {
+    "same": 55795,
+    "bitwise_equal": 4801,
+    "endpoints_differ": 5464,
+    "band_same": 3064,
+    "band_diff": 61
+   },
+   "max_endpoint_diff": 0.6838030295349284,
+   "n_decision_diffs": 61
+  },
+  "orig|js": {
+   "counts": {
+    "same": 55795,
+    "bitwise_equal": 4801,
+    "endpoints_differ": 5464,
+    "band_same": 3064,
+    "band_diff": 61
+   },
+   "max_endpoint_diff": 0.6838030295349284,
+   "n_decision_diffs": 61
+  },
+  "rust|js": {
+   "counts": {
+    "same": 55795,
+    "bitwise_equal": 10314,
+    "band_same": 3125
+   },
+   "max_endpoint_diff": 0.0,
+   "n_decision_diffs": 0
+  }
+ },
+ "convention_gap": {
+  "interval_moved": 14,
+  "decision_changed": 8
+ },
+ "hmd_cliff": [
+  {
+   "bin": "-17",
+   "n": 15,
+   "orig_agree": 10,
+   "rust_agree": 9
+  },
+  {
+   "bin": "-16",
+   "n": 97,
+   "orig_agree": 72,
+   "rust_agree": 72
+  },
+  {
+   "bin": "-15",
+   "n": 343,
+   "orig_agree": 318,
+   "rust_agree": 337
+  },
+  {
+   "bin": "-14",
+   "n": 317,
+   "orig_agree": 306,
+   "rust_agree": 317
+  },
+  {
+   "bin": "-13",
+   "n": 265,
+   "orig_agree": 264,
+   "rust_agree": 265
+  },
+  {
+   "bin": "-12",
+   "n": 269,
+   "orig_agree": 269,
+   "rust_agree": 269
+  },
+  {
+   "bin": "-11",
+   "n": 258,
+   "orig_agree": 258,
+   "rust_agree": 258
+  },
+  {
+   "bin": "-10",
+   "n": 278,
+   "orig_agree": 278,
+   "rust_agree": 278
+  },
+  {
+   "bin": "-9",
+   "n": 267,
+   "orig_agree": 267,
+   "rust_agree": 267
+  },
+  {
+   "bin": "-8",
+   "n": 264,
+   "orig_agree": 264,
+   "rust_agree": 264
+  },
+  {
+   "bin": "-7",
+   "n": 254,
+   "orig_agree": 254,
+   "rust_agree": 254
+  },
+  {
+   "bin": "-6",
+   "n": 299,
+   "orig_agree": 299,
+   "rust_agree": 299
+  },
+  {
+   "bin": "-5",
+   "n": 74,
+   "orig_agree": 74,
+   "rust_agree": 74
+  }
+ ],
+ "refinement": [
+  {
+   "id": "cst-3915",
+   "table": "BUF",
+   "exact_exit": 6.91839579027,
+   "daidalus_exit": 180.0,
+   "rel_speed": 2.712139913216654e-07,
+   "inside_by": 1.8697196537686978e-06
+  },
+  {
+   "id": "cst-3991",
+   "table": "BUF",
+   "exact_exit": 175.26522044733522,
+   "daidalus_exit": 180.0,
+   "rel_speed": 1.2305608753090105e-08,
+   "inside_by": 1.9914514268748462e-06
+  }
+ ],
+ "robust": [
+  {
+   "id": "rob-nan_sox#",
+   "corruption": "NaN",
+   "field": "sox",
+   "group": "position",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-nan_soy#",
+   "corruption": "NaN",
+   "field": "soy",
+   "group": "position",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-nan_soz#",
+   "corruption": "NaN",
+   "field": "soz",
+   "group": "position",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-nan_vox#",
+   "corruption": "NaN",
+   "field": "vox",
+   "group": "velocity",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-nan_voy#",
+   "corruption": "NaN",
+   "field": "voy",
+   "group": "velocity",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-nan_voz#",
+   "corruption": "NaN",
+   "field": "voz",
+   "group": "velocity",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-nan_six#",
+   "corruption": "NaN",
+   "field": "six",
+   "group": "position",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-nan_siy#",
+   "corruption": "NaN",
+   "field": "siy",
+   "group": "position",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-nan_siz#",
+   "corruption": "NaN",
+   "field": "siz",
+   "group": "position",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-nan_vix#",
+   "corruption": "NaN",
+   "field": "vix",
+   "group": "velocity",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-nan_viy#",
+   "corruption": "NaN",
+   "field": "viy",
+   "group": "velocity",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-nan_viz#",
+   "corruption": "NaN",
+   "field": "viz",
+   "group": "velocity",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-nan_DTHR#",
+   "corruption": "NaN",
+   "field": "DTHR",
+   "group": "threshold",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-nan_ZTHR#",
+   "corruption": "NaN",
+   "field": "ZTHR",
+   "group": "threshold",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-nan_TTHR#",
+   "corruption": "NaN",
+   "field": "TTHR",
+   "group": "threshold",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-nan_TCOA#",
+   "corruption": "NaN",
+   "field": "TCOA",
+   "group": "threshold",
+   "orig": "conflict from t=0.0",
+   "orig_violation": true,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-nan_B#",
+   "corruption": "NaN",
+   "field": "B",
+   "group": "lookahead",
+   "orig": "no conflict",
+   "orig_violation": true,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-nan_T#",
+   "corruption": "NaN",
+   "field": "T",
+   "group": "lookahead",
+   "orig": "no conflict",
+   "orig_violation": true,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-inf_sox#",
+   "corruption": "+Inf",
+   "field": "sox",
+   "group": "position",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-inf_soy#",
+   "corruption": "+Inf",
+   "field": "soy",
+   "group": "position",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-inf_soz#",
+   "corruption": "+Inf",
+   "field": "soz",
+   "group": "position",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-inf_vox#",
+   "corruption": "+Inf",
+   "field": "vox",
+   "group": "velocity",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-inf_voy#",
+   "corruption": "+Inf",
+   "field": "voy",
+   "group": "velocity",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-inf_voz#",
+   "corruption": "+Inf",
+   "field": "voz",
+   "group": "velocity",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-inf_six#",
+   "corruption": "+Inf",
+   "field": "six",
+   "group": "position",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-inf_siy#",
+   "corruption": "+Inf",
+   "field": "siy",
+   "group": "position",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-inf_siz#",
+   "corruption": "+Inf",
+   "field": "siz",
+   "group": "position",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-inf_vix#",
+   "corruption": "+Inf",
+   "field": "vix",
+   "group": "velocity",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-inf_viy#",
+   "corruption": "+Inf",
+   "field": "viy",
+   "group": "velocity",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-inf_viz#",
+   "corruption": "+Inf",
+   "field": "viz",
+   "group": "velocity",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-inf_DTHR#",
+   "corruption": "+Inf",
+   "field": "DTHR",
+   "group": "threshold",
+   "orig": "conflict from t=0.0",
+   "orig_violation": true,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-inf_ZTHR#",
+   "corruption": "+Inf",
+   "field": "ZTHR",
+   "group": "threshold",
+   "orig": "conflict from t=0.0",
+   "orig_violation": true,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-inf_TTHR#",
+   "corruption": "+Inf",
+   "field": "TTHR",
+   "group": "threshold",
+   "orig": "conflict from t=0.0",
+   "orig_violation": true,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-inf_TCOA#",
+   "corruption": "+Inf",
+   "field": "TCOA",
+   "group": "threshold",
+   "orig": "conflict from t=0.0",
+   "orig_violation": true,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-inf_B#",
+   "corruption": "+Inf",
+   "field": "B",
+   "group": "lookahead",
+   "orig": "conflict from t=180.0",
+   "orig_violation": true,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-inf_T#",
+   "corruption": "+Inf",
+   "field": "T",
+   "group": "lookahead",
+   "orig": "conflict from t=0.0",
+   "orig_violation": true,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-ninf_sox#",
+   "corruption": "-Inf",
+   "field": "sox",
+   "group": "position",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-ninf_soy#",
+   "corruption": "-Inf",
+   "field": "soy",
+   "group": "position",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-ninf_soz#",
+   "corruption": "-Inf",
+   "field": "soz",
+   "group": "position",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-ninf_vox#",
+   "corruption": "-Inf",
+   "field": "vox",
+   "group": "velocity",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-ninf_voy#",
+   "corruption": "-Inf",
+   "field": "voy",
+   "group": "velocity",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-ninf_voz#",
+   "corruption": "-Inf",
+   "field": "voz",
+   "group": "velocity",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-ninf_six#",
+   "corruption": "-Inf",
+   "field": "six",
+   "group": "position",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-ninf_siy#",
+   "corruption": "-Inf",
+   "field": "siy",
+   "group": "position",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-ninf_siz#",
+   "corruption": "-Inf",
+   "field": "siz",
+   "group": "position",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-ninf_vix#",
+   "corruption": "-Inf",
+   "field": "vix",
+   "group": "velocity",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-ninf_viy#",
+   "corruption": "-Inf",
+   "field": "viy",
+   "group": "velocity",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-ninf_viz#",
+   "corruption": "-Inf",
+   "field": "viz",
+   "group": "velocity",
+   "orig": "no conflict",
+   "orig_violation": false,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-ninf_DTHR#",
+   "corruption": "-Inf",
+   "field": "DTHR",
+   "group": "threshold",
+   "orig": "conflict from t=0.0",
+   "orig_violation": true,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-ninf_ZTHR#",
+   "corruption": "-Inf",
+   "field": "ZTHR",
+   "group": "threshold",
+   "orig": "conflict from t=0.0",
+   "orig_violation": true,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-ninf_TTHR#",
+   "corruption": "-Inf",
+   "field": "TTHR",
+   "group": "threshold",
+   "orig": "conflict from t=0.0",
+   "orig_violation": true,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-ninf_TCOA#",
+   "corruption": "-Inf",
+   "field": "TCOA",
+   "group": "threshold",
+   "orig": "conflict from t=0.0",
+   "orig_violation": true,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-ninf_B#",
+   "corruption": "-Inf",
+   "field": "B",
+   "group": "lookahead",
+   "orig": "no conflict",
+   "orig_violation": true,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-ninf_T#",
+   "corruption": "-Inf",
+   "field": "T",
+   "group": "lookahead",
+   "orig": "conflict from t=-Infinity",
+   "orig_violation": true,
+   "rust": "NonFiniteInput"
+  },
+  {
+   "id": "rob-bad_DTHR_neg#",
+   "corruption": "out of domain",
+   "field": "DTHR neg",
+   "group": "threshold",
+   "orig": "conflict from t=0.0",
+   "orig_violation": true,
+   "rust": "BadThreshold"
+  },
+  {
+   "id": "rob-bad_DTHR_zero#",
+   "corruption": "out of domain",
+   "field": "DTHR zero",
+   "group": "threshold",
+   "orig": "conflict from t=0.0",
+   "orig_violation": true,
+   "rust": "BadThreshold"
+  },
+  {
+   "id": "rob-bad_ZTHR_neg#",
+   "corruption": "out of domain",
+   "field": "ZTHR neg",
+   "group": "threshold",
+   "orig": "conflict from t=0.0",
+   "orig_violation": true,
+   "rust": "BadThreshold"
+  },
+  {
+   "id": "rob-bad_ZTHR_zero#",
+   "corruption": "out of domain",
+   "field": "ZTHR zero",
+   "group": "threshold",
+   "orig": "conflict from t=0.0",
+   "orig_violation": true,
+   "rust": "BadThreshold"
+  },
+  {
+   "id": "rob-bad_TTHR_neg#",
+   "corruption": "out of domain",
+   "field": "TTHR neg",
+   "group": "threshold",
+   "orig": "conflict from t=0.0",
+   "orig_violation": true,
+   "rust": "BadThreshold"
+  },
+  {
+   "id": "rob-bad_TCOA_neg#",
+   "corruption": "out of domain",
+   "field": "TCOA neg",
+   "group": "threshold",
+   "orig": "conflict from t=0.0",
+   "orig_violation": true,
+   "rust": "BadThreshold"
+  },
+  {
+   "id": "rob-bad_B_gt_T#",
+   "corruption": "out of domain",
+   "field": "B gt T",
+   "group": "lookahead",
+   "orig": "conflict from t=10.0",
+   "orig_violation": true,
+   "rust": "BadLookahead"
+  },
+  {
+   "id": "rob-bad_B_eq_T#",
+   "corruption": "out of domain",
+   "field": "B eq T",
+   "group": "lookahead",
+   "orig": "no conflict",
+   "orig_violation": true,
+   "rust": "BadLookahead"
+  },
+  {
+   "id": "rob-bad_B_negative#",
+   "corruption": "out of domain",
+   "field": "B negative",
+   "group": "lookahead",
+   "orig": "conflict from t=-5.0",
+   "orig_violation": true,
+   "rust": "BadLookahead"
+  }
+ ],
+ "fuzz": {
+  "iterations": 20000000,
+  "ok": 324862,
+  "conflicts": 47,
+  "panics": 0,
+  "invariant_violations": 0,
+  "errors": {
+   "BadLookahead": 6267,
+   "BadThreshold": 8019195,
+   "NonFiniteInput": 6233364,
+   "OutOfRange": 5416312
+  }
+ },
+ "bench": {
+  "java": {
+   "detect": [
+    {
+     "run": 1,
+     "median": 125.45,
+     "min": 106.02,
+     "bytes": 217.0
+    },
+    {
+     "run": 2,
+     "median": 103.01,
+     "min": 90.87,
+     "bytes": 217.0
+    },
+    {
+     "run": 3,
+     "median": 227.43,
+     "min": 126.8,
+     "bytes": 217.0
+    }
+   ],
+   "violation": [
+    {
+     "run": 1,
+     "median": 105.9,
+     "min": 79.65,
+     "bytes": 205.4
+    },
+    {
+     "run": 2,
+     "median": 341.37,
+     "min": 98.7,
+     "bytes": 205.4
+    },
+    {
+     "run": 3,
+     "median": 98.11,
+     "min": 68.5,
+     "bytes": 205.4
+    }
+   ]
+  },
+  "rust": {
+   "detect": [
+    {
+     "run": 1,
+     "median": 43.96,
+     "min": 40.61,
+     "bytes": 0.0
+    },
+    {
+     "run": 2,
+     "median": 35.18,
+     "min": 33.65,
+     "bytes": 0.0
+    },
+    {
+     "run": 3,
+     "median": 37.99,
+     "min": 34.88,
+     "bytes": 0.0
+    }
+   ],
+   "violation": [
+    {
+     "run": 1,
+     "median": 39.84,
+     "min": 31.02,
+     "bytes": 0.0
+    },
+    {
+     "run": 2,
+     "median": 35.84,
+     "min": 30.79,
+     "bytes": 0.0
+    },
+    {
+     "run": 3,
+     "median": 39.2,
+     "min": 32.45,
+     "bytes": 0.0
+    }
+   ]
+  }
+ },
+ "presets": [
+  {
+   "id": "edge-headon_far",
+   "label": "Head-on, 20 km apart",
+   "note": "Same altitude, closing at 400 m/s. The modified tau falls to 35 s at 14.7 s, and the loss of well-clear lasts until the intruder leaves the DTHR circle behind ownship at 53.1 s.",
+   "table": "P1",
+   "table_name": "DO-365 DWC Phase I",
+   "x": {
+    "sox": 0.0,
+    "soy": 0.0,
+    "soz": 3000.0,
+    "vox": 200.0,
+    "voy": 0.0,
+    "voz": 0.0,
+    "six": 20000.0,
+    "siy": 0.0,
+    "siz": 3000.0,
+    "vix": -200.0,
+    "viy": 0.0,
+    "viz": 0.0,
+    "B": 0.0,
+    "T": 180.0,
+    "DTHR": 1222.3200000000002,
+    "ZTHR": 137.16,
+    "TTHR": 35.0,
+    "TCOA": 0.0
+   },
+   "exact": {
+    "conflict": true,
+    "lo": 14.73520578109614,
+    "hi": 53.0558,
+    "violation": false,
+    "wcv_now": false,
+    "band": "",
+    "pure_lo": 14.73520578109614,
+    "pure_hi": 53.0558,
+    "m_hmd": "1.000e+00"
+   },
+   "orig": {
+    "t_in": 14.735205781096141,
+    "t_out": 53.0558,
+    "conflict": true,
+    "violation": false
+   },
+   "rust": {
+    "t_in": 14.73520578109614,
+    "t_out": 53.0558,
+    "conflict": true,
+    "violation": false
+   }
+  },
+  {
+   "id": "edge-crossing_90deg",
+   "label": "Crossing at 90 degrees",
+   "note": "Both aircraft at 200 m/s on perpendicular tracks, 30 m apart vertically.",
+   "table": "P1",
+   "table_name": "DO-365 DWC Phase I",
+   "x": {
+    "sox": 0.0,
+    "soy": -8000.0,
+    "soz": 3000.0,
+    "vox": 0.0,
+    "voy": 200.0,
+    "voz": 0.0,
+    "six": -8000.0,
+    "siy": 0.0,
+    "siz": 3030.0,
+    "vix": 200.0,
+    "viy": 0.0,
+    "viz": -1.0,
+    "B": 0.0,
+    "T": 180.0,
+    "DTHR": 1222.3200000000002,
+    "ZTHR": 137.16,
+    "TTHR": 35.0,
+    "TCOA": 0.0
+   },
+   "exact": {
+    "conflict": true,
+    "lo": 4.474300921184776,
+    "hi": 44.321553803899704,
+    "violation": false,
+    "wcv_now": false,
+    "band": "",
+    "pure_lo": 4.474300921184776,
+    "pure_hi": 44.321553803899704,
+    "m_hmd": "1.000e+00"
+   },
+   "orig": {
+    "t_in": 4.474300921184776,
+    "t_out": 44.321553803899704,
+    "conflict": true,
+    "violation": false
+   },
+   "rust": {
+    "t_in": 4.474300921184776,
+    "t_out": 44.321553803899704,
+    "conflict": true,
+    "violation": false
+   }
+  },
+  {
+   "id": "cpa-0",
+   "label": "Random encounter, intruder descending",
+   "note": "From the realistic encounter set: the intruder descends at 5,300 fpm into the 450 ft band.",
+   "table": "P1",
+   "table_name": "DO-365 DWC Phase I",
+   "x": {
+    "sox": -2903.8770702038673,
+    "soy": -37144.2121999408,
+    "soz": 10020.798368370872,
+    "vox": 47.36311958731768,
+    "voy": 306.4848094021813,
+    "voz": 0.0,
+    "six": -3061.6502357881377,
+    "siy": -25790.573673627216,
+    "siz": 10759.931133971362,
+    "vix": 77.35902553879369,
+    "viy": -25.532764743872807,
+    "viz": -26.774389517162863,
+    "B": 0.0,
+    "T": 160.7424680110619,
+    "DTHR": 1222.3200000000002,
+    "ZTHR": 137.16,
+    "TTHR": 35.0,
+    "TCOA": 0.0
+   },
+   "exact": {
+    "conflict": true,
+    "lo": 22.483155599667928,
+    "hi": 32.728767355788676,
+    "violation": false,
+    "wcv_now": false,
+    "band": "",
+    "pure_lo": 22.483155599667928,
+    "pure_hi": 32.728767355788676,
+    "m_hmd": "4.998e-01"
+   },
+   "orig": {
+    "t_in": 22.48315559966793,
+    "t_out": 32.728767355788676,
+    "conflict": true,
+    "violation": false
+   },
+   "rust": {
+    "t_in": 22.48315559966793,
+    "t_out": 32.728767355788676,
+    "conflict": true,
+    "violation": false
+   }
+  },
+  {
+   "id": "cpa-330",
+   "label": "Near miss outside DTHR",
+   "note": "The horizontal miss distance is slightly larger than DTHR, so there is no loss of well-clear at any time.",
+   "table": "P1",
+   "table_name": "DO-365 DWC Phase I",
+   "x": {
+    "sox": 8906.394828866745,
+    "soy": -20740.920256582107,
+    "soz": 6671.80397723254,
+    "vox": -315.07435414226916,
+    "voy": 11.059462227049963,
+    "voz": 0.0,
+    "six": 1055.1478238858945,
+    "siy": -28730.201143106835,
+    "siz": 6647.880391294589,
+    "vix": -11.009480093045942,
+    "viy": 256.546432619522,
+    "viz": 0.0,
+    "B": 0.0,
+    "T": 55.0,
+    "DTHR": 1222.3200000000002,
+    "ZTHR": 137.16,
+    "TTHR": 35.0,
+    "TCOA": 0.0
+   },
+   "exact": {
+    "conflict": false,
+    "lo": null,
+    "hi": null,
+    "violation": false,
+    "wcv_now": false,
+    "band": "",
+    "pure_lo": null,
+    "pure_hi": null,
+    "m_hmd": "1.039e-01"
+   },
+   "orig": {
+    "t_in": "inf",
+    "t_out": "-inf",
+    "conflict": false,
+    "violation": false
+   },
+   "rust": {
+    "t_in": "inf",
+    "t_out": "-inf",
+    "conflict": false,
+    "violation": false
+   }
+  },
+  {
+   "id": "edge-vertical_only",
+   "label": "Vertical-only approach",
+   "note": "Horizontally inside DTHR with no relative horizontal motion, descending into the 450 ft band.",
+   "table": "P1",
+   "table_name": "DO-365 DWC Phase I",
+   "x": {
+    "sox": 100.0,
+    "soy": 0.0,
+    "soz": 1000.0,
+    "vox": 150.0,
+    "voy": 0.0,
+    "voz": -5.08,
+    "six": 0.0,
+    "siy": 0.0,
+    "siz": 0.0,
+    "vix": 150.0,
+    "viy": 0.0,
+    "viz": 0.0,
+    "B": 0.0,
+    "T": 180.0,
+    "DTHR": 1222.3200000000002,
+    "ZTHR": 137.16,
+    "TTHR": 35.0,
+    "TCOA": 0.0
+   },
+   "exact": {
+    "conflict": true,
+    "lo": 169.8503937007874,
+    "hi": 180.0,
+    "violation": false,
+    "wcv_now": false,
+    "band": "",
+    "pure_lo": 169.8503937007874,
+    "pure_hi": 180.0,
+    "m_hmd": ""
+   },
+   "orig": {
+    "t_in": 169.8503937007874,
+    "t_out": 180.0,
+    "conflict": true,
+    "violation": false
+   },
+   "rust": {
+    "t_in": 169.8503937007874,
+    "t_out": 180.0,
+    "conflict": true,
+    "violation": false
+   }
+  },
+  {
+   "id": "edge-tcoa_buffered",
+   "label": "Buffered table, TCOA = 20 s",
+   "note": "Vertical closure at 20 m/s: the band widens to |vz| x TCOA = 400 m before the aircraft reach the same altitude (SEM-3).",
+   "table": "BUF",
+   "table_name": "Buffered DWC",
+   "x": {
+    "sox": 0.0,
+    "soy": 0.0,
+    "soz": 600.0,
+    "vox": 100.0,
+    "voy": 0.0,
+    "voz": -20.0,
+    "six": 500.0,
+    "siy": 0.0,
+    "siz": 0.0,
+    "vix": 100.0,
+    "viy": 0.0,
+    "viz": 0.0,
+    "B": 0.0,
+    "T": 180.0,
+    "DTHR": 1852.0,
+    "ZTHR": 137.16,
+    "TTHR": 35.0,
+    "TCOA": 20.0
+   },
+   "exact": {
+    "conflict": true,
+    "lo": 10.0,
+    "hi": 36.858,
+    "violation": false,
+    "wcv_now": false,
+    "band": "",
+    "pure_lo": 10.0,
+    "pure_hi": 36.858,
+    "m_hmd": ""
+   },
+   "orig": {
+    "t_in": 10.0,
+    "t_out": 36.858,
+    "conflict": true,
+    "violation": false
+   },
+   "rust": {
+    "t_in": 10.0,
+    "t_out": 36.858,
+    "conflict": true,
+    "violation": false
+   }
+  },
+  {
+   "id": "edge-tangent_exact#2000.0-100.0",
+   "label": "Exact tangency (HMD = DTHR)",
+   "note": "The semantic cliff: on an exactly tangent path the horizontal violation set is 35 s long (here from -15 s to 20 s, so the loss within the lookahead lasts 20 s), and on a path one ULP further out there is no loss at all. Both implementations resolve this case correctly.",
+   "table": "P1",
+   "table_name": "DO-365 DWC Phase I",
+   "x": {
+    "sox": 1222.3200000000002,
+    "soy": 2000.0,
+    "soz": 3000.0,
+    "vox": 0.0,
+    "voy": -100.0,
+    "voz": 0.0,
+    "six": 0.0,
+    "siy": 0.0,
+    "siz": 3000.0,
+    "vix": 0.0,
+    "viy": 0.0,
+    "viz": 0.0,
+    "B": 0.0,
+    "T": 180.0,
+    "DTHR": 1222.3200000000002,
+    "ZTHR": 137.16,
+    "TTHR": 35.0,
+    "TCOA": 0.0
+   },
+   "exact": {
+    "conflict": true,
+    "lo": 0.0,
+    "hi": 20.0,
+    "violation": true,
+    "wcv_now": true,
+    "band": "hmd",
+    "pure_lo": 0.0,
+    "pure_hi": 20.0,
+    "m_hmd": "0.000e+00"
+   },
+   "orig": {
+    "t_in": 0.0,
+    "t_out": 20.0,
+    "conflict": true,
+    "violation": true
+   },
+   "rust": {
+    "t_in": 0.0,
+    "t_out": 20.000000138106795,
+    "conflict": true,
+    "violation": true
+   }
+  },
+  {
+   "id": "edge-tangent_tthr0#NC",
+   "label": "Tangency with TTHR = 0",
+   "note": "Non-cooperative table: the exact loss is a single instant, so there is no conflict (SEM-7). The original agrees; the regenerated version reports a conflict lasting 0.2 microseconds. The case is inside the boundary band.",
+   "table": "NC",
+   "table_name": "Non-cooperative",
+   "x": {
+    "sox": 670.5600000000001,
+    "soy": 2000.0,
+    "soz": 3000.0,
+    "vox": 0.0,
+    "voy": -100.0,
+    "voz": 0.0,
+    "six": 0.0,
+    "siy": 0.0,
+    "siz": 3000.0,
+    "vix": 0.0,
+    "viy": 0.0,
+    "viz": 0.0,
+    "B": 0.0,
+    "T": 180.0,
+    "DTHR": 670.5600000000001,
+    "ZTHR": 137.16,
+    "TTHR": 0.0,
+    "TCOA": 0.0
+   },
+   "exact": {
+    "conflict": false,
+    "lo": 20.0,
+    "hi": 20.0,
+    "violation": false,
+    "wcv_now": false,
+    "band": "hmd;short",
+    "pure_lo": 20.0,
+    "pure_hi": 20.0,
+    "m_hmd": "0.000e+00"
+   },
+   "orig": {
+    "t_in": "inf",
+    "t_out": "-inf",
+    "conflict": false,
+    "violation": false
+   },
+   "rust": {
+    "t_in": 19.999999902343752,
+    "t_out": 20.00000009765625,
+    "conflict": true,
+    "violation": false
+   }
+  },
+  {
+   "id": "edge-on_circle_tangential#75.0",
+   "label": "Boundary contact (SEM-8)",
+   "note": "Exactly on the DTHR circle and moving tangentially away: WCV(s, v) holds at t = 0, but under the DAIDALUS convention this is not a violation. All implementations follow the convention.",
+   "table": "P1",
+   "table_name": "DO-365 DWC Phase I",
+   "x": {
+    "sox": 1222.3200000000002,
+    "soy": 0.0,
+    "soz": 3000.0,
+    "vox": 0.0,
+    "voy": 75.0,
+    "voz": 0.0,
+    "six": 0.0,
+    "siy": 0.0,
+    "siz": 3000.0,
+    "vix": 0.0,
+    "viy": 0.0,
+    "viz": 0.0,
+    "B": 0.0,
+    "T": 180.0,
+    "DTHR": 1222.3200000000002,
+    "ZTHR": 137.16,
+    "TTHR": 35.0,
+    "TCOA": 0.0
+   },
+   "exact": {
+    "conflict": false,
+    "lo": 0.0,
+    "hi": 0.0,
+    "violation": false,
+    "wcv_now": true,
+    "band": "hmd;short",
+    "pure_lo": 0.0,
+    "pure_hi": 0.0,
+    "m_hmd": "0.000e+00"
+   },
+   "orig": {
+    "t_in": "inf",
+    "t_out": "-inf",
+    "conflict": false,
+    "violation": false
+   },
+   "rust": {
+    "t_in": "inf",
+    "t_out": "-inf",
+    "conflict": false,
+    "violation": false
+   }
+  },
+  {
+   "id": "edge-static_on_boundary",
+   "label": "No relative motion at DTHR",
+   "note": "Closed boundary (NUM-3): at exactly DTHR, the loss lasts for the whole lookahead.",
+   "table": "P1",
+   "table_name": "DO-365 DWC Phase I",
+   "x": {
+    "sox": 1222.3200000000002,
+    "soy": 0.0,
+    "soz": 3000.0,
+    "vox": 150.0,
+    "voy": 0.0,
+    "voz": 0.0,
+    "six": 0.0,
+    "siy": 0.0,
+    "siz": 3000.0,
+    "vix": 150.0,
+    "viy": 0.0,
+    "viz": 0.0,
+    "B": 0.0,
+    "T": 180.0,
+    "DTHR": 1222.3200000000002,
+    "ZTHR": 137.16,
+    "TTHR": 35.0,
+    "TCOA": 0.0
+   },
+   "exact": {
+    "conflict": true,
+    "lo": 0.0,
+    "hi": 180.0,
+    "violation": true,
+    "wcv_now": true,
+    "band": "static",
+    "pure_lo": 0.0,
+    "pure_hi": 180.0,
+    "m_hmd": ""
+   },
+   "orig": {
+    "t_in": 0.0,
+    "t_out": 180.0,
+    "conflict": true,
+    "violation": true
+   },
+   "rust": {
+    "t_in": 0.0,
+    "t_out": 180.0,
+    "conflict": true,
+    "violation": true
+   }
+  },
+  {
+   "id": "edge-level_at_zthr",
+   "label": "Level flight at exactly ZTHR",
+   "note": "A vertical separation of exactly 450 ft with vz = 0 is inside the vertical band at all times.",
+   "table": "P1",
+   "table_name": "DO-365 DWC Phase I",
+   "x": {
+    "sox": 0.0,
+    "soy": 0.0,
+    "soz": 137.16,
+    "vox": 100.0,
+    "voy": 0.0,
+    "voz": 0.0,
+    "six": 3000.0,
+    "siy": 0.0,
+    "siz": 0.0,
+    "vix": -100.0,
+    "viy": 0.0,
+    "viz": 0.0,
+    "B": 0.0,
+    "T": 180.0,
+    "DTHR": 1222.3200000000002,
+    "ZTHR": 137.16,
+    "TTHR": 35.0,
+    "TCOA": 0.0
+   },
+   "exact": {
+    "conflict": true,
+    "lo": 0.0,
+    "hi": 21.1116,
+    "violation": true,
+    "wcv_now": true,
+    "band": "level",
+    "pure_lo": 0.0,
+    "pure_hi": 21.1116,
+    "m_hmd": "1.000e+00"
+   },
+   "orig": {
+    "t_in": 0.0,
+    "t_out": 21.1116,
+    "conflict": true,
+    "violation": true
+   },
+   "rust": {
+    "t_in": 0.0,
+    "t_out": 21.1116,
+    "conflict": true,
+    "violation": true
+   }
+  },
+  {
+   "id": "cst-3915",
+   "label": "Stationary snap (NUM-2)",
+   "note": "About 2 micrometers inside DTHR, drifting apart at 0.27 micrometers per second. DAIDALUS treats this as no relative motion and reports 180 s of loss, while the exact exit is at 6.9 s. The oracle found this case in run 1, and the behavior is kept as a convention that both implementations follow.",
+   "table": "BUF",
+   "table_name": "Buffered DWC",
+   "x": {
+    "sox": 1851.9999981302803,
+    "soy": 0.0,
+    "soz": 14578.265747469879,
+    "vox": -43.22625398340373,
+    "voy": 84.10314258598454,
+    "voz": 0.0,
+    "six": 0.0,
+    "siy": 0.0,
+    "siz": 14644.391953609282,
+    "vix": -43.22625425365708,
+    "viy": 84.10314260879144,
+    "viz": 0.0,
+    "B": 0.0,
+    "T": 180.0,
+    "DTHR": 1852.0,
+    "ZTHR": 137.16,
+    "TTHR": 35.0,
+    "TCOA": 20.0
+   },
+   "exact": {
+    "conflict": true,
+    "lo": 0.0,
+    "hi": 180.0,
+    "violation": true,
+    "wcv_now": true,
+    "band": "",
+    "pure_lo": 0.0,
+    "pure_hi": 6.91839579027,
+    "m_hmd": "9.929e-01"
+   },
+   "orig": {
+    "t_in": 0.0,
+    "t_out": 180.0,
+    "conflict": true,
+    "violation": true
+   },
+   "rust": {
+    "t_in": 0.0,
+    "t_out": 180.0,
+    "conflict": true,
+    "violation": true
+   }
+  },
+  {
+   "id": "chmd-1619",
+   "label": "Boundary band: near tangency, short loss",
+   "note": "Within 1e-9 of the HMD cliff, with a short exact loss. The original reports no conflict and the regenerated version reports a conflict, in agreement with the exact semantics.",
+   "table": "P2",
+   "table_name": "Phase II",
+   "x": {
+    "sox": -38846.58633558661,
+    "soy": 40937.84768609598,
+    "soz": 6786.744969288776,
+    "vox": 12.550553469586692,
+    "voy": 76.97205210597528,
+    "voz": -9.187198715674214,
+    "six": -17433.470004146413,
+    "siy": 28507.9417429948,
+    "siz": 5739.782994906783,
+    "vix": -171.96879143466126,
+    "viy": 188.6875743357051,
+    "viz": 0.0,
+    "B": 0.0,
+    "T": 180.0,
+    "DTHR": 457.20000000000005,
+    "ZTHR": 137.16,
+    "TTHR": 0.0,
+    "TCOA": 0.0
+   },
+   "exact": {
+    "conflict": true,
+    "lo": 114.76480206614174,
+    "hi": 114.76480241139446,
+    "violation": false,
+    "wcv_now": false,
+    "band": "hmd;short",
+    "pure_lo": 114.76480206614174,
+    "pure_hi": 114.76480241139446,
+    "m_hmd": "6.633e-15"
+   },
+   "orig": {
+    "t_in": "inf",
+    "t_out": "-inf",
+    "conflict": false,
+    "violation": false
+   },
+   "rust": {
+    "t_in": 114.76480206568985,
+    "t_out": 114.76480241184632,
+    "conflict": true,
+    "violation": false
+   }
+  },
+  {
+   "id": "chmd-76",
+   "label": "Boundary band: near tangency",
+   "note": "The horizontal miss distance exceeds DTHR by 4e-13 m (less than two ULPs of DTHR), so under the exact semantics there is no loss. The original reports 8.8 s of loss (the 35 s tangency interval, clipped by the vertical window); the regenerated version reports none.",
+   "table": "P1",
+   "table_name": "DO-365 DWC Phase I",
+   "x": {
+    "sox": 8071.994087636711,
+    "soy": 41101.49889515122,
+    "soz": 13396.35027599565,
+    "vox": -176.94929337106825,
+    "voy": 108.8150182990959,
+    "voz": -18.427710217035223,
+    "six": -20933.999177969614,
+    "siy": 32105.130221112537,
+    "siz": 10779.79281391728,
+    "vix": 27.54657648900006,
+    "viy": 163.32216461563794,
+    "viz": 0.0,
+    "B": 0.0,
+    "T": 180.0,
+    "DTHR": 1222.3200000000002,
+    "ZTHR": 137.16,
+    "TTHR": 35.0,
+    "TCOA": 0.0
+   },
+   "exact": {
+    "conflict": false,
+    "lo": null,
+    "hi": null,
+    "violation": false,
+    "wcv_now": false,
+    "band": "hmd",
+    "pure_lo": null,
+    "pure_hi": null,
+    "m_hmd": "6.642e-16"
+   },
+   "orig": {
+    "t_in": 134.54723527106086,
+    "t_out": 143.3809114536437,
+    "conflict": true,
+    "violation": false
+   },
+   "rust": {
+    "t_in": "inf",
+    "t_out": "-inf",
+    "conflict": false,
+    "violation": false
+   }
+  }
+ ],
+ "requirements": [
+  {
+   "id": "IF-1",
+   "kind": "interface",
+   "title": "Inputs and outputs",
+   "text": "Inputs: ownship and intruder position/velocity (so, vo, si, vi) as 3-vectors in a local Euclidean frame (m, m/s); lookahead bounds B, T (s); thresholds DTHR, ZTHR (m), TTHR, TCOA (s). Outputs: detection interval [t_in, t_out] within [B, T], or the empty encoding (+inf, -inf); a conflict flag; a violation flag.",
+   "code": [
+    "ACCoRD/WCV_tvar.java:128-130",
+    "ACCoRD/ConflictData.java:45-46",
+    "ACCoRD/Detection3D.java:39-62"
+   ],
+   "pvs": "WCV.WCV_interval, WCV.WCV_detection",
+   "rel": "agrees",
+   "verify": [
+    "inspect",
+    "diff"
+   ],
+   "status": {
+    "orig": "pass",
+    "rust": "pass",
+    "evidence": "Same encoding of empty results ((+inf, -inf)) on all vectors"
+   }
+  },
+  {
+   "id": "ENV-1",
+   "kind": "envelope",
+   "title": "Threshold domain",
+   "text": "DTHR, ZTHR > 0 and TTHR, TCOA >= 0. The code does not reject other values: every setter and the 4-argument constructor silently replace a threshold by its absolute value, and zero is accepted.",
+   "code": [
+    "ACCoRD/WCVTable.java:52-56",
+    "ACCoRD/WCVTable.java:197-246"
+   ],
+   "pvs": "theory parameters WCV[TTHR,TCOA:nnreal, DTHR,ZTHR:posreal]",
+   "rel": "assumption",
+   "verify": [
+    "inspect",
+    "fuzz"
+   ],
+   "status": {
+    "orig": "observed",
+    "rust": "pass",
+    "evidence": "Original: negative and zero thresholds computed without complaint (6 of 6). Regenerated: rejected with BadThreshold (6 of 6)"
+   }
+  },
+  {
+   "id": "ENV-2",
+   "kind": "envelope",
+   "title": "Lookahead domain",
+   "text": "Interval detection assumes 0 <= B < T. B almost equal to T is an instantaneous check evaluated on [B, B+1]; B > T returns no conflict.",
+   "code": [
+    "ACCoRD/WCV_tvar.java:139",
+    "ACCoRD/Detection3D.java:53-61"
+   ],
+   "pvs": "WCV.WCV_detection (B=T, B>T cases)",
+   "rel": "agrees",
+   "verify": [
+    "inspect",
+    "diff"
+   ],
+   "status": {
+    "orig": "observed",
+    "rust": "pass",
+    "evidence": "Original conflictDetection: B > T yields an inverted 'conflict' [10, 50]; B < 0 yields a loss starting in the past. Regenerated: BadLookahead"
+   }
+  },
+  {
+   "id": "ENV-3",
+   "kind": "envelope",
+   "title": "Operating ranges and threshold tables",
+   "text": "Horizontal speed 10-700 kt, vertical speed +/-6000 fpm, altitude 100-50,000 ft, lookahead 180 s. Threshold tables in use: DO-365 DWC Phase I (0.66 nmi / 450 ft / 35 s / 0 s), Phase I preventive (700 ft), Phase II (1500 ft / 450 ft / 0 s), non-cooperative (2200 ft / 450 ft / 0 s), buffered DWC and preventive (1.0 nmi / 450 or 750 ft / 35 s / TCOA 20 s).",
+   "code": [
+    "Configurations/DO_365B_no_SUM.conf",
+    "ACCoRD/WCVTable.java:101-137"
+   ],
+   "pvs": "n/a",
+   "rel": "n/a",
+   "verify": [
+    "oracle",
+    "diff"
+   ],
+   "status": {
+    "orig": "pass",
+    "rust": "pass",
+    "evidence": "All six DO-365 threshold tables, speeds to 700 kt, vertical rates to 6000 fpm, lookahead to 180 s"
+   }
+  },
+  {
+   "id": "ENV-4",
+   "kind": "envelope",
+   "title": "Finite inputs",
+   "text": "Positions, velocities, thresholds and lookahead are assumed finite. Nothing in the component checks this; behavior on NaN or infinity is unspecified and is measured by the fuzz check.",
+   "code": [
+    "(absence of any check)"
+   ],
+   "pvs": "reals only",
+   "rel": "assumption",
+   "verify": [
+    "fuzz"
+   ],
+   "status": {
+    "orig": "observed",
+    "rust": "pass",
+    "evidence": "Original: answered on all 54 non-finite inputs, 'no conflict' in 42 of them for an encounter that is a violation when uncorrupted. DAIDALUS's top-level API screens NaN aircraft states, not infinities. Regenerated: NonFiniteInput on all 54"
+   }
+  },
+  {
+   "id": "SEM-1",
+   "kind": "semantic",
+   "title": "Only relative state matters",
+   "text": "All outputs depend only on s = so - si and v = vo - vi (translating both aircraft, or adding the same velocity to both, changes nothing).",
+   "code": [
+    "ACCoRD/WCV_tvar.java:144-151"
+   ],
+   "pvs": "WCV(s, v) is stated on relative vectors",
+   "rel": "agrees",
+   "verify": [
+    "meta",
+    "oracle"
+   ],
+   "status": {
+    "orig": "pass",
+    "rust": "pass",
+    "evidence": "3,000 / 3,000 translated vectors give the same answer"
+   }
+  },
+  {
+   "id": "SEM-2",
+   "kind": "semantic",
+   "title": "Horizontal well-clear violation (modified tau)",
+   "text": "|s_h|^2 <= D^2, or (HMD^2 <= D^2 and 0 <= taumod <= TTHR), where HMD^2 = |s_h + tcpa*v_h|^2, tcpa = -(s_h.v_h)/|v_h|^2 (0 if v_h = 0), and taumod = (D^2 - |s_h|^2)/(s_h.v_h) if s_h.v_h < 0, else -1.",
+   "code": [
+    "ACCoRD/WCV_tvar.java:116-123",
+    "ACCoRD/WCV_TAUMOD.java:86-93",
+    "ACCoRD/Horizontal.java:65-81"
+   ],
+   "pvs": "horizontal_WCV.horizontal_WCV, horizontal_WCV_taumod.taumod, tcas_tau.tau_mod_def",
+   "rel": "agrees",
+   "verify": [
+    "oracle",
+    "diff"
+   ],
+   "status": {
+    "orig": "pass",
+    "rust": "pass",
+    "evidence": "55,795 / 55,795 decisions outside the band match exact semantics"
+   }
+  },
+  {
+   "id": "SEM-3",
+   "kind": "semantic",
+   "title": "Vertical well-clear violation",
+   "text": "|sz| <= ZTHR, or 0 <= tcoa <= TCOA where tcoa = -sz/vz if sz*vz < 0, else -1.",
+   "code": [
+    "ACCoRD/WCV_TCOA.java:18-22"
+   ],
+   "pvs": "vertical_WCV.vertical_WCV, timevars.tcoa",
+   "rel": "agrees",
+   "verify": [
+    "oracle",
+    "diff"
+   ],
+   "status": {
+    "orig": "pass",
+    "rust": "pass",
+    "evidence": "55,795 / 55,795 decisions outside the band match exact semantics"
+   }
+  },
+  {
+   "id": "SEM-4",
+   "kind": "semantic",
+   "title": "Well-clear violation is horizontal and vertical violation",
+   "text": "WCV(s, v) holds if and only if the horizontal (SEM-2) and vertical (SEM-3) conditions both hold.",
+   "code": [
+    "ACCoRD/WCV_tvar.java:153-170"
+   ],
+   "pvs": "WCV.WCV",
+   "rel": "agrees",
+   "verify": [
+    "oracle"
+   ],
+   "status": {
+    "orig": "pass",
+    "rust": "pass",
+    "evidence": "55,795 / 55,795 decisions outside the band match exact semantics"
+   }
+  },
+  {
+   "id": "SEM-5",
+   "kind": "semantic",
+   "title": "Detection interval is exact",
+   "text": "For 0 <= B < T and every t in [B, T]: WCV(s + t*v, v) holds if and only if t_in <= t <= t_out. The endpoints are themselves violation times (closed interval).",
+   "code": [
+    "ACCoRD/WCV_tvar.java:140-170",
+    "ACCoRD/WCV_TAUMOD.java:95-124",
+    "ACCoRD/WCV_TCOA.java:25-46"
+   ],
+   "pvs": "WCV_taumod.WCV_taumod_interval_correct (proved in PVS for real arithmetic)",
+   "rel": "agrees",
+   "verify": [
+    "oracle",
+    "diff"
+   ],
+   "status": {
+    "orig": "pass",
+    "rust": "pass",
+    "evidence": "8,655 intervals: max endpoint error 8.0e-07 s (original), 3.7e-07 s (regenerated)"
+   }
+  },
+  {
+   "id": "SEM-6",
+   "kind": "semantic",
+   "title": "Symmetry",
+   "text": "Exchanging ownship and intruder does not change any output.",
+   "code": [
+    "(consequence of SEM-2/3: both are invariant under (s, v) -> (-s, -v))"
+   ],
+   "pvs": "WCV_taumod.WCV_taumod_symmetric",
+   "rel": "agrees",
+   "verify": [
+    "meta"
+   ],
+   "status": {
+    "orig": "pass",
+    "rust": "pass",
+    "evidence": "3,000 / 3,000 swapped vectors give the same answer"
+   }
+  },
+  {
+   "id": "SEM-7",
+   "kind": "semantic",
+   "title": "Conflict flag suppresses near-instantaneous loss",
+   "text": "conflict <=> t_in < t_out and t_in, t_out are not almost-equal (within 16348 ULPs, or both within 1e-13 of zero). The PVS detection function reports a conflict even when the violation set is a single instant; the code deliberately does not.",
+   "code": [
+    "Util/LossData.java:44-45",
+    "Util/Util.java:226-267"
+   ],
+   "pvs": "differs from WCV.WCV_detection at single-instant contacts",
+   "rel": "convention",
+   "verify": [
+    "oracle",
+    "diff"
+   ],
+   "status": {
+    "orig": "pass",
+    "rust": "pass",
+    "evidence": "55,795 / 55,795 conflict flags outside the band"
+   }
+  },
+  {
+   "id": "SEM-8",
+   "kind": "semantic",
+   "title": "Violation flag is derived from detection on [0, 1]",
+   "text": "violation <=> detection on [0, 1] reports a conflict whose t_in is almost 0. Consequence: a state that touches the well-clear boundary only at t = 0 (for example exactly at DTHR and moving away) is not a violation, although WCV(s, v) holds at that instant.",
+   "code": [
+    "ACCoRD/Detection3D.java:39-41",
+    "ACCoRD/Detection3D.java:53-57"
+   ],
+   "pvs": "differs from WCV(s, v) on the boundary set",
+   "rel": "convention",
+   "verify": [
+    "oracle",
+    "diff"
+   ],
+   "status": {
+    "orig": "pass",
+    "rust": "pass",
+    "evidence": "55,795 violation flags outside the band; 6 / 6 boundary touches follow the convention"
+   }
+  },
+  {
+   "id": "NUM-1",
+   "kind": "numerical",
+   "title": "Level-flight snap",
+   "text": "A relative vertical speed with |vz| < 1e-13 m/s is treated as exactly zero.",
+   "code": [
+    "ACCoRD/WCV_TCOA.java:20",
+    "ACCoRD/WCV_TCOA.java:28-30",
+    "Util/Util.java:232-241"
+   ],
+   "pvs": "PVS uses vz = 0 exactly",
+   "rel": "convention",
+   "verify": [
+    "diff",
+    "oracle"
+   ],
+   "status": {
+    "orig": "pass",
+    "rust": "pass",
+    "evidence": "Level-flight snap cases match the convention-adjusted model"
+   }
+  },
+  {
+   "id": "NUM-2",
+   "kind": "numerical",
+   "title": "Stationary-geometry snap",
+   "text": "If |v_h|^2 < 1e-13 m^2/s^2 and |s_h| <= DTHR at the start of the vertical window, relative horizontal motion is treated as zero and the horizontal condition holds for the whole window. Consequence: when |s_h| is within about sqrt(1e-13)*T (6e-5 m for T = 180 s) of DTHR and the aircraft drift apart, the reported exit time can be later than the exact one by up to the whole lookahead. Preserved as a convention for drop-in equivalence.",
+   "code": [
+    "ACCoRD/WCV_TAUMOD.java:104-108",
+    "ACCoRD/WCV_tvar.java:158-166"
+   ],
+   "pvs": "PVS uses a = 0 exactly",
+   "rel": "convention",
+   "verify": [
+    "diff",
+    "oracle"
+   ],
+   "history": "Refined after oracle run 1: the first version stated the snap but not its consequence; the exact oracle found 2 of 600 near-stationary vectors where DAIDALUS reported 180 s of violation against an exact exit at 6.9 s and 175 s.",
+   "status": {
+    "orig": "pass",
+    "rust": "pass",
+    "evidence": "Matches the refined requirement; 2 vectors in run 1 exposed the original wording as incomplete"
+   }
+  },
+  {
+   "id": "NUM-3",
+   "kind": "numerical",
+   "title": "Closed boundaries",
+   "text": "Every threshold comparison is <=, so boundary points are inside the well-clear violation volume.",
+   "code": [
+    "ACCoRD/WCV_tvar.java:117-121",
+    "ACCoRD/WCV_TCOA.java:19"
+   ],
+   "pvs": "same (<= throughout)",
+   "rel": "agrees",
+   "verify": [
+    "oracle",
+    "diff"
+   ],
+   "status": {
+    "orig": "pass",
+    "rust": "pass",
+    "evidence": "Closed-boundary edge cases (exact DTHR, exact ZTHR) inside the volume"
+   }
+  },
+  {
+   "id": "NUM-4",
+   "kind": "numerical",
+   "title": "Tangency tolerance in the circle-exit root",
+   "text": "When the circle-exit discriminant is within 16348 ULPs of zero it is treated as zero (tangent) instead of producing NaN.",
+   "code": [
+    "ACCoRD/Horizontal.java:129-134",
+    "Util/Util.java:421-433"
+   ],
+   "pvs": "PVS root is exact",
+   "rel": "convention",
+   "verify": [
+    "diff"
+   ],
+   "status": {
+    "orig": "pass",
+    "rust": "pass",
+    "evidence": "29 / 29 exact-tangency vectors resolved as conflicts by both"
+   }
+  },
+  {
+   "id": "ACC-1",
+   "kind": "accuracy",
+   "title": "Semantic cliffs are a declared boundary band",
+   "text": "The conflict decision is discontinuous at HMD = DTHR (the horizontal interval jumps from length TTHR to empty), at |s_h| = DTHR with zero relative horizontal velocity, and at |sz| = ZTHR in level flight. Inputs within relative margin 1e-9 of a cliff, or whose exact violation set is shorter than 1e-6 s (or misses by less than 1e-6 s), or that sit on a 1e-13 snap threshold (NUM-1/NUM-2), are boundary-band: any answer is accepted but recorded. Outside the band, answers are graded against the exact semantics with the NUM-1/NUM-2 conventions applied.",
+   "code": [
+    "(derived by analysis of SEM-2/3; not stated in code or PVS)"
+   ],
+   "pvs": "n/a (exact reals have no rounding)",
+   "rel": "n/a",
+   "verify": [
+    "oracle"
+   ],
+   "history": "Refined after oracle run 1: grading now applies the NUM-1/NUM-2 conventions, and the pure exact semantics is kept alongside so the convention gap is reported rather than hidden.",
+   "status": {
+    "orig": "recorded",
+    "rust": "recorded",
+    "evidence": "3,125 boundary-band vectors: original agrees with exact in 3,056, regenerated in 3,085"
+   }
+  },
+  {
+   "id": "ACC-2",
+   "kind": "accuracy",
+   "title": "Accuracy outside the band",
+   "text": "Outside the boundary band, conflict and violation decisions equal the exact semantics (SEM-2..8) and interval endpoints are within 1e-6 s of the exact endpoints.",
+   "code": [
+    "(acceptance criterion chosen for this thread)"
+   ],
+   "pvs": "n/a",
+   "rel": "n/a",
+   "verify": [
+    "oracle"
+   ],
+   "status": {
+    "orig": "pass",
+    "rust": "pass",
+    "evidence": "Max endpoint error 8.0e-07 s vs 3.7e-07 s (limit 1e-6 s)"
+   }
+  },
+  {
+   "id": "PERF-1",
+   "kind": "performance",
+   "title": "Constant time",
+   "text": "Closed-form evaluation: no loops or iteration; cost per call is independent of the inputs.",
+   "code": [
+    "ACCoRD/WCV_TAUMOD.java:95-124",
+    "ACCoRD/WCV_TCOA.java:25-46"
+   ],
+   "pvs": "n/a",
+   "rel": "n/a",
+   "verify": [
+    "inspect",
+    "bench"
+   ],
+   "status": {
+    "orig": "pass",
+    "rust": "pass",
+    "evidence": "Closed form, no loops, in both"
+   }
+  },
+  {
+   "id": "PERF-2",
+   "kind": "performance",
+   "title": "Throughput no worse than the original",
+   "text": "Single-thread calls per second on the same vectors must be at least the original's.",
+   "code": [
+    "(measured baseline)"
+   ],
+   "pvs": "n/a",
+   "rel": "n/a",
+   "verify": [
+    "bench"
+   ],
+   "status": {
+    "orig": "baseline",
+    "rust": "pass",
+    "evidence": "See performance section"
+   }
+  },
+  {
+   "id": "IMP-1",
+   "kind": "improvement",
+   "title": "Explicit errors instead of silent answers",
+   "text": "Reject non-finite inputs, out-of-domain thresholds and malformed lookahead with an explicit error (the original sanitizes or silently computes; see ENV-1, ENV-4).",
+   "code": [
+    "(requested improvement; not derived)"
+   ],
+   "pvs": "n/a",
+   "rel": "n/a",
+   "verify": [
+    "fuzz"
+   ],
+   "status": {
+    "orig": "n/a",
+    "rust": "pass",
+    "evidence": "63 / 63 invalid inputs rejected with a typed error"
+   }
+  },
+  {
+   "id": "IMP-2",
+   "kind": "improvement",
+   "title": "Memory-safe, panic-free",
+   "text": "No unsafe code; no panic for any input bit pattern.",
+   "code": [
+    "(requested improvement; not derived)"
+   ],
+   "pvs": "n/a",
+   "rel": "n/a",
+   "verify": [
+    "fuzz",
+    "inspect"
+   ],
+   "status": {
+    "orig": "n/a",
+    "rust": "pass",
+    "evidence": "20,000,000 fuzz iterations: 0 panics, 0 malformed results; component crate forbids unsafe code"
+   }
+  },
+  {
+   "id": "IMP-3",
+   "kind": "improvement",
+   "title": "No heap allocation per call",
+   "text": "The hot path allocates nothing (the original allocates vector and interval objects on every call).",
+   "code": [
+    "(requested improvement; not derived)"
+   ],
+   "pvs": "n/a",
+   "rel": "n/a",
+   "verify": [
+    "bench"
+   ],
+   "status": {
+    "orig": "n/a",
+    "rust": "pass",
+    "evidence": "0 bytes per call vs about 210 bytes per call in the original"
+   }
+  }
+ ]
+}

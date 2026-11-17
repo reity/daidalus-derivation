@@ -1,0 +1,26 @@
+# Build outputs (DAIDALUS checkout, decompressed corpus, and results of each run).
+build/
+rust/target/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.venv/
+venv/
+
+# Node.js
+node_modules/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store

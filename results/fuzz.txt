@@ -1,0 +1,1 @@
+fuzz iterations=20000000 ok=324862 conflicts=47 panics=0 invariant_violations=0 errors=[("BadLookahead", 6267), ("BadThreshold", 8019195), ("NonFiniteInput", 6233364), ("OutOfRange", 5416312)]

@@ -1,0 +1,37 @@
+name: reproduce
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+jobs:
+  reproduce:
+    runs-on: ubuntu-24.04
+    name: Reproduce results
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Python.
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+          architecture: x64
+      - name: Install Java.
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Install Node.js.
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - name: Install Rust.
+        uses: dtolnay/rust-toolchain@stable
+      - name: Regenerate the corpus and reproduce every committed result.
+        run: |
+          make corpus # Regenerate the test vectors and compare them with the committed corpus.
+          make verify # Run all implementations and the exact model, then compare all results.
+      - name: Run all tests against the DAIDALUS checkout.
+        run: |
+          pip install -U .[test]
+          make test

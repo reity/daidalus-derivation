@@ -1,0 +1,5 @@
+# Enforce LF line endings for all text files.
+* text=auto eol=lf
+
+# The compressed corpus of test vectors is binary.
+*.gz binary

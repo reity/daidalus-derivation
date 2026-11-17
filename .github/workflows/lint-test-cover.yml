@@ -1,0 +1,52 @@
+name: lint-test-cover
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+  workflow_dispatch:
+jobs:
+  python:
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        python-version: ['3.10', '3.11', '3.12', '3.13']
+    name: Python ${{ matrix.python-version }}
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Python.
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+          architecture: x64
+      - name: Lint and test package.
+        run: |
+          pip install -U .[lint,test]
+          python -m pylint src/wellclear # Check against linting rules.
+          python -m pytest # Run tests (including doctests) and measure coverage.
+  rust:
+    runs-on: ubuntu-24.04
+    name: Rust
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Rust.
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - name: Lint and test crate.
+        working-directory: rust
+        run: |
+          cargo fmt --check # Check formatting.
+          cargo clippy --all-targets --locked -- -D warnings # Check against linting rules.
+          cargo test --release --locked # Run unit tests and documentation tests.
+  javascript:
+    runs-on: ubuntu-24.04
+    name: JavaScript
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Node.js.
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - name: Test port.
+        run: node --test web/*.test.js

@@ -1,0 +1,18 @@
+[package]
+name = "wellclear"
+version = "0.1.0"
+edition = "2021"
+description = "DO-365 well-clear violation detection regenerated from requirements derived from NASA DAIDALUS."
+publish = false
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "wellclear"
+path = "src/main.rs"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1

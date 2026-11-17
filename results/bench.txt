@@ -1,0 +1,18 @@
+# date: 2026-11-17
+# cpu: Intel Xeon @ 2.10 GHz, 2 vCPU
+# java: OpenJDK 21.0.12.1
+# rust: rustc 1.97.0
+# node: Node 22.23.4
+# python: Python 3.13.18
+java run1 detect n=58920 passes=40 ns_per_call_median=125.45 ns_per_call_min=106.02 bytes_per_call=217.0
+java run1 violation n=58920 passes=40 ns_per_call_median=105.90 ns_per_call_min=79.65 bytes_per_call=205.4
+rust run1 detect n=58920 passes=40 ns_per_call_median=43.96 ns_per_call_min=40.61 bytes_per_call=0.0
+rust run1 violation n=58920 passes=40 ns_per_call_median=39.84 ns_per_call_min=31.02 bytes_per_call=0.0
+java run2 detect n=58920 passes=40 ns_per_call_median=103.01 ns_per_call_min=90.87 bytes_per_call=217.0
+java run2 violation n=58920 passes=40 ns_per_call_median=341.37 ns_per_call_min=98.70 bytes_per_call=205.4
+rust run2 detect n=58920 passes=40 ns_per_call_median=35.18 ns_per_call_min=33.65 bytes_per_call=0.0
+rust run2 violation n=58920 passes=40 ns_per_call_median=35.84 ns_per_call_min=30.79 bytes_per_call=0.0
+java run3 detect n=58920 passes=40 ns_per_call_median=227.43 ns_per_call_min=126.80 bytes_per_call=217.0
+java run3 violation n=58920 passes=40 ns_per_call_median=98.11 ns_per_call_min=68.50 bytes_per_call=205.4
+rust run3 detect n=58920 passes=40 ns_per_call_median=37.99 ns_per_call_min=34.88 bytes_per_call=0.0
+rust run3 violation n=58920 passes=40 ns_per_call_median=39.20 ns_per_call_min=32.45 bytes_per_call=0.0
