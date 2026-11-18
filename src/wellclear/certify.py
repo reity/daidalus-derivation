@@ -284,7 +284,7 @@ def _domain(values: list[Fraction | None]) -> bool:
     (b, t, dthr, zthr, tthr, tcoa) = values[12:]
     return dthr > 0 and zthr > 0 and tthr >= 0 and tcoa >= 0 and 0 <= b < t
 
-def hint(expected: dict, default: str) -> str:
+def short_hint(expected: dict, default: str) -> str:
     """
     Return the (untrusted) hint for a ``short`` certificate as a decimal string:
     the start of the exact violation set if there is one (taken from the oracle
@@ -305,7 +305,7 @@ def evaluate(item: tuple) -> dict:
     (vector, expected, actual) = item
     values = [decode(vector[k]) for k in FIELDS]
     conflict = actual.get('conflict') == '1'
-    clue = hint(expected, vector['B'])
+    clue = short_hint(expected, vector['B'])
     lean = {'id': vector['id']} | {k: bits(vector[k]) for k in FIELDS}
     lean.update(conflict=int(conflict), t_in=bits(actual.get('t_in', '')),
                 t_out=bits(actual.get('t_out', '')), hint=bits(clue))
