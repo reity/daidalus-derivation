@@ -7,7 +7,7 @@ from typing import Sequence
 import argparse
 import sys
 
-from wellclear import requirements, vectors, oracle, check, summary, page
+from wellclear import requirements, vectors, oracle, check, certify, summary, page
 
 def _requirements(arguments: argparse.Namespace) -> None:
     """
@@ -55,6 +55,24 @@ def _check(arguments: argparse.Namespace) -> None:
         print(
             f"{pair}: {dict(comparison['counts'])}, "
             f"maximum endpoint difference {comparison['max_endpoint_diff']}"
+        )
+
+def _certify(arguments: argparse.Namespace) -> None:
+    """
+    Certify the answers of the implementations (with the executable twin of the
+    Lean checker) and write the verdicts and the inputs of the Lean checker.
+    """
+    implementations = dict(entry.split('=', 1) for entry in arguments.implementations)
+    report = certify.report(arguments.vectors, arguments.oracle, arguments.directory,
+                            implementations)
+    certify.save(arguments.output, report)
+    for (name, record) in report['implementations'].items():
+        counts = record['counts']
+        print(
+            f"{name}: " + ', '.join(f'{counts.get(v, 0):,} {v}' for v in certify.VERDICTS) +
+            f"; uncertified by category {record['uncertified_categories']}, "
+            f"{len(record['uncertified_graded'])} uncertified outside the band and conventions, "
+            f"{record['inconsistent_with_exact_model']} inconsistent with the exact model"
         )
 
 def _environment(_: argparse.Namespace) -> None:
@@ -109,6 +127,14 @@ def parser() -> argparse.ArgumentParser:
     command.add_argument('implementations', nargs='+', metavar='NAME=PATH')
     command.set_defaults(handler=_check)
 
+    command = commands.add_parser('certify', help='certify the answers of the implementations')
+    command.add_argument('vectors')
+    command.add_argument('oracle')
+    command.add_argument('directory')
+    command.add_argument('output')
+    command.add_argument('implementations', nargs='+', metavar='NAME=PATH')
+    command.set_defaults(handler=_certify)
+
     command = commands.add_parser('environment', help='describe the machine and toolchains')
     command.set_defaults(handler=_environment)
 
@@ -117,7 +143,9 @@ def parser() -> argparse.ArgumentParser:
     for (name, default) in (
         ('vectors', 'build/vectors.csv'), ('oracle', 'build/oracle.csv'),
         ('orig', 'build/original.csv'), ('rust', 'build/rust.csv'), ('js', 'build/js.csv'),
-        ('grades', 'results/grades.json'), ('bench', 'results/bench.txt'),
+        ('grades', 'results/grades.json'), ('certify', 'results/certify.json'),
+        ('axioms', 'results/axioms.txt'), ('toolchain', 'lean/lean-toolchain'),
+        ('manifest', 'lean/lake-manifest.json'), ('bench', 'results/bench.txt'),
         ('fuzz', 'results/fuzz.txt'), ('library', 'rust/src/lib.rs')
     ):
         command.add_argument('--' + name, default=default)

@@ -19,10 +19,11 @@ REGENERATED := rust/target/release/wellclear
 VECTORS := $(BUILD)/vectors.csv
 RESULTS := $(BUILD)/oracle.csv $(BUILD)/original.csv $(BUILD)/rust.csv $(BUILD)/js.csv
 IMPLEMENTATIONS := orig=$(BUILD)/original.csv rust=$(BUILD)/rust.csv js=$(BUILD)/js.csv
+CERTIFIED := $(BUILD)/certify
 FUZZ := 20000000 20261117
 
-.PHONY: all requirements corpus daidalus harness rust results checksums grades fuzz bench \
-	summary page verify test lint clean
+.PHONY: all requirements corpus daidalus harness rust results checksums grades certify fuzz bench \
+	summary page verify lean test lint clean
 
 all: results
 
@@ -81,6 +82,12 @@ checksums: results
 grades: results
 	$(WELLCLEAR) check $(VECTORS) $(BUILD)/oracle.csv results/grades.json $(IMPLEMENTATIONS)
 
+# Certification of every answer of every implementation by the executable twin of the Lean
+# checker (lean/Wellclear/Check.lean), which also writes the input files of the Lean checker.
+certify: results
+	$(WELLCLEAR) certify $(VECTORS) $(BUILD)/oracle.csv $(CERTIFIED) results/certify.json \
+	  $(IMPLEMENTATIONS)
+
 fuzz: rust
 	$(REGENERATED) fuzz $(FUZZ) > results/fuzz.txt
 
@@ -102,13 +109,37 @@ page:
 verify: checksums rust
 	$(WELLCLEAR) check $(VECTORS) $(BUILD)/oracle.csv $(BUILD)/grades.json $(IMPLEMENTATIONS)
 	cmp $(BUILD)/grades.json results/grades.json
+	$(WELLCLEAR) certify $(VECTORS) $(BUILD)/oracle.csv $(CERTIFIED) $(BUILD)/certify.json \
+	  $(IMPLEMENTATIONS)
+	cmp $(BUILD)/certify.json results/certify.json
 	$(REGENERATED) fuzz $(FUZZ) > $(BUILD)/fuzz.txt
 	cmp $(BUILD)/fuzz.txt results/fuzz.txt
-	$(WELLCLEAR) summary $(BUILD)/summary.json --grades $(BUILD)/grades.json --fuzz $(BUILD)/fuzz.txt
+	$(WELLCLEAR) summary $(BUILD)/summary.json --grades $(BUILD)/grades.json \
+	  --certify $(BUILD)/certify.json --fuzz $(BUILD)/fuzz.txt
 	cmp $(BUILD)/summary.json results/summary.json
 	$(WELLCLEAR) page $(BUILD)/index.html --summary $(BUILD)/summary.json
 	cmp $(BUILD)/index.html index.html
 	@echo "every committed result was reproduced"
+
+# The Lean development (requires elan; see lean/README.md). Building it checks every proof, and the
+# axioms on which the main theorems depend are compared with the committed list. The Lean checker
+# then certifies the answers of every implementation (run by the Lean interpreter, which avoids
+# compiling Mathlib to native code), and its verdicts are compared with those of its executable
+# twin.
+LEAN_NAMES := orig rust js
+
+lean: $(RESULTS)
+	$(WELLCLEAR) certify $(VECTORS) $(BUILD)/oracle.csv $(CERTIFIED) $(BUILD)/certify-lean.json \
+	  $(IMPLEMENTATIONS)
+	cd lean && lake build
+	cd lean && lake env lean scripts/axioms.lean > ../$(BUILD)/axioms.txt
+	diff results/axioms.txt $(BUILD)/axioms.txt
+	for name in $(LEAN_NAMES); do \
+	  (cd lean && lake env lean --run Main.lean certify ../$(CERTIFIED)/lean-$$name.csv \
+	    ../$(CERTIFIED)/lean-verdicts-$$name.csv) || exit 1; \
+	  cmp $(CERTIFIED)/certify-$$name.csv $(CERTIFIED)/lean-verdicts-$$name.csv || exit 1; \
+	done
+	@echo "the Lean checker reproduced every verdict"
 
 test:
 	PYTHONPATH=src $(PYTHON) -m pytest
@@ -120,4 +151,4 @@ lint:
 	cd rust && $(CARGO) fmt --check && $(CARGO) clippy --all-targets --locked -- -D warnings
 
 clean:
-	rm -rf $(BUILD) rust/target
+	rm -rf $(BUILD) rust/target lean/.lake

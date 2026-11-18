@@ -895,6 +895,143 @@
    "rust": "BadLookahead"
   }
  ],
+ "certification": {
+  "epsilon": "1/1000000",
+  "lean": "v4.35.0",
+  "mathlib": "v4.35.0",
+  "implementations": {
+   "orig": {
+    "counts": {
+     "band_empty": 1448,
+     "band_interval": 1559,
+     "band_short": 45,
+     "band_uncertified": 73,
+     "convention_uncertified": 2,
+     "empty": 48588,
+     "graded_empty": 47140,
+     "graded_interval": 8653,
+     "interval": 10212,
+     "invalid": 63,
+     "short": 45,
+     "uncertified": 75
+    },
+    "graded": 55793,
+    "graded_certified": 55793,
+    "inconsistent_with_exact_model": 0
+   },
+   "rust": {
+    "counts": {
+     "band_empty": 1445,
+     "band_interval": 1607,
+     "band_short": 10,
+     "band_uncertified": 63,
+     "convention_uncertified": 2,
+     "empty": 48585,
+     "graded_empty": 47140,
+     "graded_interval": 8653,
+     "interval": 10260,
+     "invalid": 63,
+     "short": 10,
+     "uncertified": 65
+    },
+    "graded": 55793,
+    "graded_certified": 55793,
+    "inconsistent_with_exact_model": 0
+   },
+   "js": {
+    "counts": {
+     "band_empty": 1445,
+     "band_interval": 1607,
+     "band_short": 10,
+     "band_uncertified": 63,
+     "convention_uncertified": 2,
+     "empty": 48585,
+     "graded_empty": 47140,
+     "graded_interval": 8653,
+     "interval": 10260,
+     "invalid": 63,
+     "short": 10,
+     "uncertified": 65
+    },
+    "graded": 55793,
+    "graded_certified": 55793,
+    "inconsistent_with_exact_model": 0
+   }
+  },
+  "axioms": [
+   {
+    "theorem": "certify_interval",
+    "axioms": [
+     "propext",
+     "Classical.choice",
+     "Quot.sound"
+    ]
+   },
+   {
+    "theorem": "certify_empty",
+    "axioms": [
+     "propext",
+     "Classical.choice",
+     "Quot.sound"
+    ]
+   },
+   {
+    "theorem": "certify_short",
+    "axioms": [
+     "propext",
+     "Classical.choice",
+     "Quot.sound"
+    ]
+   },
+   {
+    "theorem": "violations_ordConnected",
+    "axioms": [
+     "propext",
+     "Classical.choice",
+     "Quot.sound"
+    ]
+   },
+   {
+    "theorem": "violations_eq_Icc",
+    "axioms": [
+     "propext",
+     "Classical.choice",
+     "Quot.sound"
+    ]
+   },
+   {
+    "theorem": "wcv_swap",
+    "axioms": [
+     "propext",
+     "Classical.choice",
+     "Quot.sound"
+    ]
+   },
+   {
+    "theorem": "rel_add",
+    "axioms": [
+     "propext",
+     "Quot.sound"
+    ]
+   },
+   {
+    "theorem": "stableRoots_tau",
+    "axioms": [
+     "propext",
+     "Classical.choice",
+     "Quot.sound"
+    ]
+   },
+   {
+    "theorem": "stableRoots_circle",
+    "axioms": [
+     "propext",
+     "Classical.choice",
+     "Quot.sound"
+    ]
+   }
+  ]
+ },
  "fuzz": {
   "iterations": 20000000,
   "ok": 324862,

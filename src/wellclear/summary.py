@@ -4,9 +4,10 @@ document (``results/summary.json``).
 
 The summary is computed from the test vectors, the oracle records, the results
 of the three implementations (the original DAIDALUS component, the regenerated
-Rust component, and its JavaScript port), the grading report, the benchmark
-log, the fuzzing log, and the requirements. Every number that appears on the
-page is taken from this document.
+Rust component, and its JavaScript port), the grading report, the certification
+summary, the axioms of the Lean theorems, the benchmark log, the fuzzing log,
+and the requirements. Every number that appears on the page is taken from this
+document.
 """
 from __future__ import annotations
 from typing import Callable
@@ -399,6 +400,48 @@ def _bench(log: str) -> dict:
 
     return result
 
+def _axioms(log: str) -> list[dict]:
+    """
+    Return the axioms on which each theorem depends, as listed by
+    ``#print axioms`` in the Lean development.
+
+    >>> _axioms("'Wellclear.rel_add' depends on axioms: [propext, Quot.sound]\\n")
+    [{'theorem': 'rel_add', 'axioms': ['propext', 'Quot.sound']}]
+    """
+    pattern = r"^'([\w.]+)' depends on axioms: \[(.*)\]$"
+    return [
+        {'theorem': name.removeprefix('Wellclear.'), 'axioms': axioms.split(', ')}
+        for (name, axioms) in re.findall(pattern, log, re.MULTILINE)
+    ]
+
+def _certification(data: dict) -> dict:
+    """
+    Return the verdicts of the Lean checker for each implementation (the counts
+    of the certification summary, with the number of certified answers among
+    those outside the boundary band and the conventions), the versions of Lean
+    and Mathlib, and the axioms of the main theorems.
+    """
+    report = data['certify']
+    mathlib = next(p for p in data['manifest']['packages'] if p['name'] == 'mathlib')
+    implementations = {}
+    for name in IMPLEMENTATIONS:
+        entry = report['implementations'][name]
+        graded = sum(n for (key, n) in entry['counts'].items() if key.startswith('graded_'))
+        implementations[name] = {
+            'counts': entry['counts'],
+            'graded': graded,
+            'graded_certified': graded - entry['counts'].get('graded_uncertified', 0),
+            'inconsistent_with_exact_model': entry['inconsistent_with_exact_model']
+        }
+
+    return {
+        'epsilon': report['epsilon'],
+        'lean': data['toolchain'].strip().partition(':')[2],
+        'mathlib': mathlib['inputRev'],
+        'implementations': implementations,
+        'axioms': _axioms(data['axioms'])
+    }
+
 def _presets(data: dict) -> list[dict]:
     """
     Return the encounters offered as presets in the interactive explorer, with
@@ -636,8 +679,10 @@ def load(paths: dict) -> dict:
     """
     Return the inputs of the summary, given a dictionary with the paths
     ``vectors``, ``oracle``, ``orig``, ``rust``, ``js`` (the results of each
-    implementation), ``grades``, ``bench``, ``fuzz``, and ``library`` (the
-    source file of the regenerated component).
+    implementation), ``grades``, ``certify`` (the certification summary),
+    ``axioms`` (the axioms of the Lean theorems), ``toolchain`` and
+    ``manifest`` (the Lean toolchain and package manifest), ``bench``,
+    ``fuzz``, and ``library`` (the source file of the regenerated component).
     """
     def text(key: str) -> str:
         return pathlib.Path(paths[key]).read_text(encoding='utf-8')
@@ -647,6 +692,10 @@ def load(paths: dict) -> dict:
         'oracle': read(paths['oracle']),
         'implementations': {name: read(paths[name]) for name in IMPLEMENTATIONS},
         'grades': json.loads(text('grades')),
+        'certify': json.loads(text('certify')),
+        'axioms': text('axioms'),
+        'toolchain': text('toolchain'),
+        'manifest': json.loads(text('manifest')),
         'bench': text('bench'),
         'fuzz': text('fuzz'),
         'library_lines': code_lines(text('library'))
@@ -666,6 +715,7 @@ def build(data: dict) -> dict:
         'hmd_cliff': _cliff(data),
         'refinement': _refinement(data),
         'robust': _robust(data),
+        'certification': _certification(data),
         'fuzz': _fuzz(data['fuzz']),
         'bench': _bench(data['bench']),
         'presets': _presets(data)

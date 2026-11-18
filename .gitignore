@@ -1,6 +1,7 @@
 # Build outputs (DAIDALUS checkout, decompressed corpus, and results of each run).
 build/
 rust/target/
+lean/.lake/
 
 # Python
 __pycache__/

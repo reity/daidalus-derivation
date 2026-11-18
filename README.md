@@ -2,6 +2,7 @@
 
 [![lint-test-cover](../../actions/workflows/lint-test-cover.yml/badge.svg)](../../actions/workflows/lint-test-cover.yml)
 [![reproduce](../../actions/workflows/reproduce.yml/badge.svg)](../../actions/workflows/reproduce.yml)
+[![lean](../../actions/workflows/lean.yml/badge.svg)](../../actions/workflows/lean.yml)
 
 Thin thread through the regeneration of a safety-critical software component: requirements derived from the well-clear detection component of [NASA DAIDALUS](https://github.com/nasa/daidalus), an exact executable model of those requirements, a new implementation of the component written in [Rust](https://www.rust-lang.org/) from the requirements (together with a JavaScript port), and a corpus of 58,983 test vectors on which the original and the regenerated implementations are graded against the model. The results are presented on an interactive page ([`index.html`](index.html)) that is published using GitHub Pages.
 
@@ -82,6 +83,20 @@ The checker in [`src/wellclear/check.py`](src/wellclear/check.py) grades the ori
 
 The exact model also corrected the derivation once. In the first run, it disagreed with the original component on 2 of 600 near-stationary encounters, which showed that the first version of NUM-2 described a numerical shortcut without stating its consequence. The requirement and the grading rule were refined (the history is recorded in the requirement), and the second run was clean.
 
+### Lean Formalization
+
+The directory [`lean`](lean) states the semantic requirements in [Lean 4](https://lean-lang.org/) (with [Mathlib](https://github.com/leanprover-community/mathlib4)) and proves theorems about them: the times at which the well-clear violation holds form an interval (the property proved in PVS as `WCV_taumod_interval_correct`), exchanging the aircraft does not change the violation predicate (SEM-6), and the horizontal violation set has the closed form that the regenerated implementation computes, with a proof that its numerically stable root formula gives the exact roots. It also contains a checker that certifies the answers of an implementation against the requirements. The checker runs over the rational numbers (every double is a rational number) and replaces square roots by sign tests of quadratic polynomials, and soundness theorems state what each of its verdicts guarantees over the real numbers. Its executable twin in [`src/wellclear/certify.py`](src/wellclear/certify.py) gives the same verdicts and is used to cross-check them.
+
+| Certification of the answers                             | Original (Java) | Regenerated (Rust) |
+|----------------------------------------------------------|-----------------|--------------------|
+| Conflict intervals certified within `1e-6` seconds       | 10,212          | 10,260             |
+| No-conflict answers certified (no violation)             | 48,588          | 48,585             |
+| No-conflict answers certified (violation under `2e-6` s) | 45              | 10                 |
+| Uncertified answers                                      | 75              | 65                 |
+| Certified outside the boundary band and conventions      | 55,793 / 55,793 | 55,793 / 55,793    |
+
+Every uncertified answer lies in the boundary band of ACC-1 or follows a numerical convention that deviates from the exact semantics by design (NUM-1 or NUM-2). The formalization compiles with Lean 4.35.0 and Mathlib, without `sorry`, and its main theorems depend only on the standard axioms; the Lean checker gives the same verdict as its twin for every answer of the three implementations, and the [`lean`](.github/workflows/lean.yml) workflow repeats these checks on every push. [`lean/README.md`](lean/README.md) describes the formalization and three ways of connecting an implementation to requirements stated in Lean: certifying every answer (implemented), translating the implementation into Lean (assessed), and deriving the implementation from the requirements (the closed form is derived and proved; generating the code is the next step).
+
 ## Repository Layout
 
 ```
@@ -92,9 +107,12 @@ The exact model also corrected the derivation once. In the first run, it disagre
 │   ├── requirements.md         Derived requirements (generated).
 │   └── requirements.json       Derived requirements in machine-readable form (generated).
 ├── harness/DaidalusDriver.java Harness around the unmodified DAIDALUS classes.
+├── lean/                       Lean formalization and certificate checker (see lean/README.md).
 ├── results/
 │   ├── SHA256SUMS              Checksums of the corpus, the oracle records, and the results of each implementation.
+│   ├── axioms.txt              Axioms on which the main Lean theorems depend.
 │   ├── bench.txt               Benchmark log, including the machine and toolchains.
+│   ├── certify.json            Certification summary (verdict counts of each implementation).
 │   ├── fuzz.txt                Fuzzing log.
 │   ├── grades.json             Grading report.
 │   └── summary.json            Every number shown on the interactive page.
@@ -103,12 +121,14 @@ The exact model also corrected the derivation once. In the first run, it disagre
 │   └── src/
 │       ├── lib.rs              Regenerated component.
 │       └── main.rs             Harness for the regenerated component (run, bench, and fuzz).
-├── scripts/fetch-daidalus.sh   Fetches DAIDALUS at the pinned commit.
+├── scripts/
+│   ├── fetch-daidalus.sh       Fetches DAIDALUS at the pinned commit.
 ├── src/wellclear/
 │   ├── requirements.py         Derived requirements (the single source of truth).
 │   ├── vectors.py              Test-vector generator.
 │   ├── oracle.py               Exact model.
 │   ├── check.py                Grading of implementations.
+│   ├── certify.py              Executable twin of the Lean certificate checker.
 │   ├── summary.py              Assembly of the results summary.
 │   └── page.py                 Assembly of the interactive page.
 ├── tests/                      Tests of the Python package and of the committed results.
@@ -121,13 +141,17 @@ The exact model also corrected the derivation once. In the first run, it disagre
 
 ## Reproducing the Results
 
-Reproduction requires [Python](https://www.python.org/) 3.10 or later, [Java](https://openjdk.org/) 19 or later (earlier versions format some floating-point values differently), [Node.js](https://nodejs.org/) 18 or later, a [Rust](https://www.rust-lang.org/tools/install) toolchain, [Git](https://git-scm.com/), and [GNU Make](https://www.gnu.org/software/make/). The Python package has no dependencies outside the standard library, so no installation is required to reproduce the results. The command below fetches DAIDALUS at the pinned commit into `build/daidalus`, compiles it together with the harness, runs the exact model and all three implementations on the corpus, and compares every output with the committed checksums and results (including the grading report, the fuzzing log, the summary, and the interactive page):
+Reproduction requires [Python](https://www.python.org/) 3.10 or later, [Java](https://openjdk.org/) 19 or later (earlier versions format some floating-point values differently), [Node.js](https://nodejs.org/) 18 or later, a [Rust](https://www.rust-lang.org/tools/install) toolchain, [Git](https://git-scm.com/), and [GNU Make](https://www.gnu.org/software/make/). The Python package has no dependencies outside the standard library, so no installation is required to reproduce the results. The command below fetches DAIDALUS at the pinned commit into `build/daidalus`, compiles it together with the harness, runs the exact model and all three implementations on the corpus, and compares every output with the committed checksums and results (including the grading report, the certification summary, the fuzzing log, the summary, and the interactive page):
 ```shell
 make verify
 ```
 The corpus can be regenerated and compared with the committed corpus:
 ```shell
 make corpus
+```
+The Lean development requires [elan](https://github.com/leanprover/elan), which installs the pinned Lean toolchain; Mathlib and its build cache are fetched as described in [`lean/README.md`](lean/README.md). The command below builds the development (which checks every proof), compares the axioms on which its main theorems depend with the committed list, certifies the answers of every implementation with the Lean checker, and compares its verdicts with those of the executable twin:
+```shell
+make lean
 ```
 The benchmark depends on the machine, so `make verify` does not repeat it. It can be run on the current machine, after which the summary and the page can be rebuilt:
 ```shell
@@ -139,6 +163,8 @@ PYTHONPATH=src python -m wellclear requirements derivation
 PYTHONPATH=src python -m wellclear oracle build/vectors.csv build/oracle.csv
 PYTHONPATH=src python -m wellclear check build/vectors.csv build/oracle.csv build/grades.json \
     orig=build/original.csv rust=build/rust.csv js=build/js.csv
+PYTHONPATH=src python -m wellclear certify build/vectors.csv build/oracle.csv build/certify \
+    results/certify.json orig=build/original.csv rust=build/rust.csv js=build/js.csv
 ```
 
 ## Package Installation and Usage

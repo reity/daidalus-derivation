@@ -1,0 +1,74 @@
+{
+ "epsilon": "1/1000000",
+ "implementations": {
+  "orig": {
+   "counts": {
+    "band_empty": 1448,
+    "band_interval": 1559,
+    "band_short": 45,
+    "band_uncertified": 73,
+    "convention_uncertified": 2,
+    "empty": 48588,
+    "graded_empty": 47140,
+    "graded_interval": 8653,
+    "interval": 10212,
+    "invalid": 63,
+    "short": 45,
+    "uncertified": 75
+   },
+   "uncertified_categories": {
+    "cliff_hmd": 45,
+    "cliff_static": 29,
+    "edge": 1
+   },
+   "inconsistent_with_exact_model": 0,
+   "uncertified_graded": []
+  },
+  "rust": {
+   "counts": {
+    "band_empty": 1445,
+    "band_interval": 1607,
+    "band_short": 10,
+    "band_uncertified": 63,
+    "convention_uncertified": 2,
+    "empty": 48585,
+    "graded_empty": 47140,
+    "graded_interval": 8653,
+    "interval": 10260,
+    "invalid": 63,
+    "short": 10,
+    "uncertified": 65
+   },
+   "uncertified_categories": {
+    "cliff_hmd": 34,
+    "cliff_static": 29,
+    "edge": 2
+   },
+   "inconsistent_with_exact_model": 0,
+   "uncertified_graded": []
+  },
+  "js": {
+   "counts": {
+    "band_empty": 1445,
+    "band_interval": 1607,
+    "band_short": 10,
+    "band_uncertified": 63,
+    "convention_uncertified": 2,
+    "empty": 48585,
+    "graded_empty": 47140,
+    "graded_interval": 8653,
+    "interval": 10260,
+    "invalid": 63,
+    "short": 10,
+    "uncertified": 65
+   },
+   "uncertified_categories": {
+    "cliff_hmd": 34,
+    "cliff_static": 29,
+    "edge": 2
+   },
+   "inconsistent_with_exact_model": 0,
+   "uncertified_graded": []
+  }
+ }
+}

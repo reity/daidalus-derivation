@@ -1,0 +1,46 @@
+name: lean
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+  workflow_dispatch:
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    name: Lean
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Python.
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+          architecture: x64
+      - name: Install Java.
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Install Node.js.
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - name: Install Rust.
+        uses: dtolnay/rust-toolchain@stable
+      - name: Install Lean.
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh \
+            | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Fetch Mathlib and its build cache.
+        working-directory: lean
+        run: |
+          lake exe cache get # Fetches the pinned packages and the compiled Mathlib library.
+      - name: Build the Lean development, which checks every proof.
+        working-directory: lean
+        run: |
+          set -o pipefail
+          lake build 2>&1 | tee build.log
+          if grep -n "declaration uses 'sorry'" build.log; then exit 1; fi
+      - name: Certify the answers of the implementations with the Lean checker.
+        run: make lean # Compares the axioms and the verdicts with the committed results.

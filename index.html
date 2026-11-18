@@ -233,6 +233,7 @@ pre .c{color:rgba(255,255,255,.55);}
     <a href="#explorer">Explorer</a>
     <a href="#requirements">Requirements</a>
     <a href="#checks">Checks</a>
+    <a href="#lean">Lean</a>
     <a href="#reproduce">Reproducibility</a>
   </nav>
 </div></div>
@@ -355,6 +356,24 @@ pre .c{color:rgba(255,255,255,.55);}
     <div class="tbl-wrap"><table id="bandtable"></table></div>
   </section>
 
+  <section id="lean">
+    <h2 class="sec-h">Proofs in Lean</h2>
+    <p class="prose" id="lean-intro" style="margin-bottom:16px"></p>
+    <div class="tbl-wrap"><table id="certtable"></table></div>
+    <div class="two top" style="margin-top:16px">
+      <div class="panel">
+        <div class="panel-h"><span>Theorems</span><span class="meta">proved from the requirements</span></div>
+        <div class="panel-b"><dl class="defs" id="theorems"></dl></div>
+      </div>
+      <div class="panel">
+        <div class="panel-h"><span>What each verdict guarantees</span><span class="meta">for every input</span></div>
+        <div class="panel-b"><dl class="defs" id="guarantees"></dl></div>
+      </div>
+    </div>
+    <p class="prose" id="lean-axioms" style="margin:22px 0 14px"></p>
+    <div class="caps" id="routes" style="border-top:1px solid var(--line)"></div>
+  </section>
+
   <section id="invalid">
     <h2 class="sec-h">Invalid Inputs</h2>
     <p class="prose" id="invalid-intro" style="margin-bottom:16px"></p>
@@ -394,7 +413,7 @@ pre .c{color:rgba(255,255,255,.55);}
           <ul class="items">
             <li>Repeat the regeneration with isolated contexts: one agent derives the requirements, a second regenerates the component from the requirements and the PVS specification alone, and the checker is unchanged.</li>
             <li>Extend the thread to <code>WCV_TAUMOD_SUM</code> and the bands layer, and then replay the DAIDALUS <code>Regression</code> scenarios end to end.</li>
-            <li>Replace sampling with proof: verify the Rust implementation against the PVS lemmas with a Rust verifier, or generate an implementation from the PVS specification and compare the two.</li>
+            <li>Carry the Lean proofs to the code: generate the Rust and JavaScript implementations from the closed form proved in Lean, compare them bit for bit with the current ones, and bound their rounding error.</li>
             <li>Measure the recall of code-only derivation against DO-365 Appendix G (a paid RTCA document) to determine what the code alone does not reveal.</li>
           </ul>
         </div>
@@ -1317,6 +1336,143 @@ pre .c{color:rgba(255,255,255,.55);}
    "rust": "BadLookahead"
   }
  ],
+ "certification": {
+  "epsilon": "1/1000000",
+  "lean": "v4.35.0",
+  "mathlib": "v4.35.0",
+  "implementations": {
+   "orig": {
+    "counts": {
+     "band_empty": 1448,
+     "band_interval": 1559,
+     "band_short": 45,
+     "band_uncertified": 73,
+     "convention_uncertified": 2,
+     "empty": 48588,
+     "graded_empty": 47140,
+     "graded_interval": 8653,
+     "interval": 10212,
+     "invalid": 63,
+     "short": 45,
+     "uncertified": 75
+    },
+    "graded": 55793,
+    "graded_certified": 55793,
+    "inconsistent_with_exact_model": 0
+   },
+   "rust": {
+    "counts": {
+     "band_empty": 1445,
+     "band_interval": 1607,
+     "band_short": 10,
+     "band_uncertified": 63,
+     "convention_uncertified": 2,
+     "empty": 48585,
+     "graded_empty": 47140,
+     "graded_interval": 8653,
+     "interval": 10260,
+     "invalid": 63,
+     "short": 10,
+     "uncertified": 65
+    },
+    "graded": 55793,
+    "graded_certified": 55793,
+    "inconsistent_with_exact_model": 0
+   },
+   "js": {
+    "counts": {
+     "band_empty": 1445,
+     "band_interval": 1607,
+     "band_short": 10,
+     "band_uncertified": 63,
+     "convention_uncertified": 2,
+     "empty": 48585,
+     "graded_empty": 47140,
+     "graded_interval": 8653,
+     "interval": 10260,
+     "invalid": 63,
+     "short": 10,
+     "uncertified": 65
+    },
+    "graded": 55793,
+    "graded_certified": 55793,
+    "inconsistent_with_exact_model": 0
+   }
+  },
+  "axioms": [
+   {
+    "theorem": "certify_interval",
+    "axioms": [
+     "propext",
+     "Classical.choice",
+     "Quot.sound"
+    ]
+   },
+   {
+    "theorem": "certify_empty",
+    "axioms": [
+     "propext",
+     "Classical.choice",
+     "Quot.sound"
+    ]
+   },
+   {
+    "theorem": "certify_short",
+    "axioms": [
+     "propext",
+     "Classical.choice",
+     "Quot.sound"
+    ]
+   },
+   {
+    "theorem": "violations_ordConnected",
+    "axioms": [
+     "propext",
+     "Classical.choice",
+     "Quot.sound"
+    ]
+   },
+   {
+    "theorem": "violations_eq_Icc",
+    "axioms": [
+     "propext",
+     "Classical.choice",
+     "Quot.sound"
+    ]
+   },
+   {
+    "theorem": "wcv_swap",
+    "axioms": [
+     "propext",
+     "Classical.choice",
+     "Quot.sound"
+    ]
+   },
+   {
+    "theorem": "rel_add",
+    "axioms": [
+     "propext",
+     "Quot.sound"
+    ]
+   },
+   {
+    "theorem": "stableRoots_tau",
+    "axioms": [
+     "propext",
+     "Classical.choice",
+     "Quot.sound"
+    ]
+   },
+   {
+    "theorem": "stableRoots_circle",
+    "axioms": [
+     "propext",
+     "Classical.choice",
+     "Quot.sound"
+    ]
+   }
+  ]
+ },
  "fuzz": {
   "iterations": 20000000,
   "ok": 324862,
@@ -3262,6 +3418,53 @@ $("bandtable").innerHTML = '<thead><tr><th>Boundary-band reason (recorded, not g
     return "<tr><td>" + r[1] + '</td><td class="num">' + cell(O) + '</td><td class="num">' + cell(R) + "</td></tr>";
   }).join("") + "</tbody>";
 
+/* ---------------- proofs in Lean ---------------- */
+const LC = S.certification, LI = LC.implementations;
+const lcode = (s) => "<code>" + s + "</code>";
+const seeFile = (path) => " See " + (REPOSITORY ? '<a href="' + REPOSITORY + "/blob/main/" + path + '">' + lcode(path) + "</a>" : lcode(path)) + ".";
+$("lean-intro").textContent = "The semantic requirements are also stated in Lean 4 with Mathlib, and the facts that the implementations rely on are proved from them. " +
+  "A checker written in Lean certifies each answer of an implementation against the requirements. It runs over the rational numbers, which represent every double exactly, " +
+  "and replaces the square roots of the closed form by sign tests of quadratic polynomials, so it needs no approximation. Each verdict comes with a theorem that states what it " +
+  "guarantees over the real numbers, for every input and however the answer was computed. On all " + nf(S.counts.total) + " vectors, the Lean checker gave the same verdict " +
+  "as its executable twin for each implementation, and no certified verdict disagrees with the exact model.";
+const certRows = [
+  ["Conflict intervals certified within 1e-6 s (ACC-2)", (c) => nf(c.counts.interval || 0)],
+  ["No-conflict answers certified: no loss of well-clear", (c) => nf(c.counts.empty || 0)],
+  ["No-conflict answers certified: loss shorter than 2e-6 s (SEM-7)", (c) => nf(c.counts.short || 0)],
+  ["Uncertified answers", (c) => nf(c.counts.uncertified || 0)],
+  ["Invalid inputs (outside ENV-1, ENV-2, and ENV-4)", (c) => nf(c.counts.invalid || 0)],
+  ["Certified outside the boundary band and conventions", (c) => nf(c.graded_certified) + " / " + nf(c.graded)],
+  ["Certified verdicts that disagree with the exact model", (c) => nf(c.inconsistent_with_exact_model)]
+];
+$("certtable").innerHTML = '<thead><tr><th>Verdict of the Lean checker</th><th class="num">Original (Java)</th><th class="num">Regenerated (Rust)</th><th class="num">JavaScript port</th></tr></thead><tbody>' +
+  certRows.map((r) => "<tr><td>" + r[0] + '</td><td class="num">' + r[1](LI.orig) + '</td><td class="num">' + r[1](LI.rust) + '</td><td class="num">' + r[1](LI.js) + "</td></tr>").join("") + "</tbody>";
+const theorems = [
+  ["Interval", "The times at which well-clear is lost form one interval (" + lcode("violations_ordConnected") + "), the property proved in PVS as " + lcode("WCV_taumod_interval_correct") + "."],
+  ["Closed form", "With nonzero horizontal and vertical relative speed, the interval runs from the smaller root of the modified-tau quadratic to the larger root of the DTHR quadratic, within the vertical set and the window (" + lcode("violations_eq_Icc") + ")."],
+  ["Stable roots", "In exact arithmetic, the numerically stable root formula of the Rust code gives these roots (" + lcode("stableRoots_eq") + ")."],
+  ["Symmetry", "Exchanging the aircraft (" + lcode("wcv_swap") + ", SEM-6) or translating both (" + lcode("rel_add") + ", SEM-1) changes nothing."],
+  ["Sign tests", "The square-root-free tests of the checker are equivalent to the requirements (" + lcode("pointTest_iff") + ")."],
+  ["Soundness", "Each verdict of the checker carries its guarantee (" + lcode("certify_interval") + ", " + lcode("certify_empty") + ", " + lcode("certify_short") + ")."]
+];
+$("theorems").innerHTML = theorems.map((r) => "<dt>" + r[0] + "</dt><dd>" + r[1] + "</dd>").join("");
+const guarantees = [
+  ["Interval", "No loss of well-clear in the window more than 1e-6 s before t_in or after t_out, and a loss at every time of a nonempty interval whose ends lie within 1e-6 s of t_in and t_out"],
+  ["Empty", "No loss of well-clear at any time of the lookahead window"],
+  ["Short", "Every loss within the window lies within 1e-6 s of one instant, a loss that SEM-7 suppresses"],
+  ["Uncertified", "None; the checker certifies only what it can prove"]
+];
+$("guarantees").innerHTML = guarantees.map((r) => "<dt>" + r[0] + "</dt><dd>" + r[1] + "</dd>").join("");
+const leanAxioms = [...new Set(LC.axioms.flatMap((a) => a.axioms))];
+$("lean-axioms").innerHTML = "The development is checked by Lean " + esc(LC.lean.replace(/^v/, "")) + " with Mathlib " + esc(LC.mathlib) + ". It contains no " + lcode("sorry") +
+  ", and its " + LC.axioms.length + " main theorems depend only on the standard axioms of Lean (" + leanAxioms.map(lcode).join(", ") +
+  "). Three ways of connecting an implementation to requirements stated in Lean were explored:";
+const routes = [
+  ["Certify every answer", "Implemented. The checker runs beside an implementation and accepts an answer only with a certificate.", "lean/Wellclear/Check.lean"],
+  ["Translate the code", "Assessed. Tools such as hax and Aeneas translate safe Rust into Lean, but their support for floating point and the error analysis it needs are still early.", "lean/README.md"],
+  ["Derive the code", "Started. The closed form and its stable root formula are proved; generating the Rust and JavaScript code from them is the next step.", "lean/Wellclear/Roots.lean"]
+];
+$("routes").innerHTML = routes.map((s, i) => '<div class="cap"><span class="cx">0' + (i + 1) + "</span><span><b>" + s[0] + "</b><span>" + s[1] + seeFile(s[2]) + "</span></span></div>").join("");
+
 /* ---------------- invalid inputs ---------------- */
 const groups = ["position", "velocity", "threshold", "lookahead"], corruptions = ["NaN", "+Inf", "-Inf", "out of domain"];
 const silent = S.robust.filter((r) => r.orig === "no conflict").length;
@@ -3329,7 +3532,8 @@ $("robdetail").innerHTML = "<thead><tr><th>Case</th><th>Corruption</th><th>Field
 const limitations = [
   "The requirements were derived and the Rust implementation was written in the same context, after reading the Java code, so this is not a clean-room regeneration. A stricter test would regenerate the component from <code>derivation/requirements.md</code> and the PVS specification alone, in a context that has never seen the original.",
   "The component is small and stateless. The bands, alerting, hysteresis, and sensor-uncertainty layers, in which architectural choices matter more, are not covered.",
-  "The exact model is checked against the PVS lemmas by sampling (" + nf(S.counts.selfcheck_samples) + " samples, no disagreements), not by proof.",
+  "The exact model is checked against the PVS lemmas by sampling (" + nf(S.counts.selfcheck_samples) + " samples, no disagreements), not by proof. The Lean development proves properties of the requirements and certifies answers, but it does not verify the Python model or the Rust code itself.",
+  "The Lean checker relies on the decoding of doubles and the reading of files in <code>lean/Main.lean</code>, which no theorem covers.",
   "Inside the boundary band (within 1e-9 of a semantic cliff), answers are recorded but not graded. The original and regenerated implementations disagree on " + pairs.band_diff + " of these vectors, and neither is uniformly closer to the exact answer.",
   "The regenerated component keeps the DAIDALUS numerical conventions (NUM-1 and NUM-2) so that it can replace the original without changing its answers. Dropping them would bring it closer to the exact semantics but could change answers on which the bands algorithms rely.",
   "The Java timings come from a hand-written measurement loop on a virtual machine with " + m.env.cpu.split(", ").pop() + ", not from JMH. The ratios are more meaningful than the absolute times.",
@@ -3343,6 +3547,9 @@ $("repro").innerHTML = [
   comment("Fetch DAIDALUS at " + m.commit.slice(0, 8) + ", run the exact model and all three implementations on"),
   comment("the corpus, and compare every output with the committed checksums and results."),
   "make verify",
+  "",
+  comment("Check every Lean proof and certify every answer with the Lean checker (requires elan)."),
+  "make lean",
   "",
   comment("Regenerate the " + nf(S.counts.total) + " test vectors and compare them with data/vectors.csv.gz."),
   "make corpus",
